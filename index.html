@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Я?За! — дизайн приложения</title>
+<style>
+@font-face{font-family:"Manrope";src:url(assets/fonts/manrope-cyr.woff2) format("woff2");font-weight:200 800;unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Manrope";src:url(assets/fonts/manrope-lat.woff2) format("woff2");font-weight:200 800;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+:root{--font:"Manrope",-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;--d-ink:#0E1F1D;--d-ink2:#55666A;--d-line:#D9D6CC;--d-brand:#0A7F75}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#E9E6DD;color:var(--d-ink);font:15px/1.55 var(--font);-webkit-font-smoothing:antialiased}
+.layout{display:grid;grid-template-columns:210px 1fr;min-height:100vh}
+.side{position:sticky;top:0;height:100vh;overflow:auto;padding:30px 18px;background:#0B1B19;color:#C9DAD7}
+.side .brand{font-weight:800;font-size:26px;letter-spacing:-.05em;color:#fff}
+.side .brand i{color:#3FE0CC;font-style:normal}
+.side small{display:block;color:#7E9792;margin:2px 0 22px;font-size:12px}
+.side a{display:block;padding:7px 10px;border-radius:10px;color:#9FB6B2;text-decoration:none;font-size:13.5px;font-weight:500}
+.side a:hover{background:#142B28;color:#fff}
+.side .tog{margin-top:20px;width:100%;padding:10px;border:1px solid #2A4743;border-radius:12px;background:#12302C;font:700 13px var(--font);cursor:pointer;color:#E8F6F3}
+main{padding:44px 48px 120px}
+section{padding-top:64px}
+section>h2{font-size:34px;letter-spacing:-.035em;line-height:1.1;font-weight:800;margin-bottom:6px}
+.lead{max-width:640px;color:var(--d-ink2);margin-bottom:26px;font-size:15.5px}
+.stage{display:flex;flex-wrap:wrap;gap:56px 44px;align-items:flex-start;margin:20px 0 10px}
+.fig{width:336px}
+.fig figcaption{margin-top:22px;font-size:13.5px;color:var(--d-ink2);line-height:1.5}
+.fig figcaption strong{display:block;color:var(--d-ink);font-size:15.5px;margin-bottom:3px;letter-spacing:-.01em}
+.fig figcaption ul{padding-left:16px;margin-top:4px}.fig figcaption li{margin:2px 0}
+.hero{display:flex;gap:44px;align-items:center;flex-wrap:wrap}
+.card{background:#fff;border-radius:22px;padding:22px 24px}
+.card h4{font-size:15px;margin-bottom:6px}.card p,.card li{font-size:14px;color:var(--d-ink2)}.card ul{padding-left:18px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.sw{display:flex;gap:10px;flex-wrap:wrap}.sw div{width:104px}.sw i{display:block;height:56px;border-radius:14px}
+.sw b{display:block;font-size:12.5px;margin-top:6px}.sw span{font-size:11px;color:var(--d-ink2)}
+.code{font:12px ui-monospace,Menlo,monospace;background:#F0EDE4;padding:1px 6px;border-radius:5px}
+.ia{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.ia .col{background:#fff;border-radius:20px;padding:16px}
+.ia h4{font-size:14.5px;margin-bottom:8px}
+.ia ul{list-style:none;font-size:13px;color:var(--d-ink2)}.ia li{padding:4px 0;border-top:1px solid #EEEBE3}.ia li:first-child{border:0}
+@media(max-width:1200px){.ia{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.side{display:none}main{padding:24px 16px}}
+
+/* ================= PHONE ================= */
+.phone{--bg:#F5F2EB;--sf:#fff;--sf2:#ECE8DE;--ink:#0D1F1D;--ink2:#4A5C5F;--ink3:#7B8C8F;--line:#E6E1D5;--brand:#0A7F75;--onbrand:#fff;--tint:#D9F3EE;--tintink:#04554D;
+--grad:linear-gradient(135deg,#14BFAE 0%,#0A7F75 100%);--coin:#E3A21A;--coinbg:#FBEED0;--cointxt:#7D4F05;--like:#F0505A;--ok:#17814A;--okbg:#DAF2E4;--warn:#955000;--warnbg:#FBE8CC;--glass:rgba(255,255,255,.82);
+--shadow:0 1px 2px rgba(13,31,29,.05),0 8px 24px rgba(13,31,29,.08)}
+.phone.dark,body.alldark .phone:not(.light){--bg:#08110F;--sf:#111E1C;--sf2:#192B29;--ink:#EDF6F4;--ink2:#A8BEBA;--ink3:#7A938F;--line:#203734;--brand:#2FC9B8;--onbrand:#031C19;--tint:#12403B;--tintink:#93EADF;
+--grad:linear-gradient(135deg,#36D9C6 0%,#1BA595 100%);--coin:#F2B73D;--coinbg:#3A2E10;--cointxt:#F6C55F;--like:#FF6B74;--ok:#5ACB8C;--okbg:#14382A;--warn:#F2B25C;--warnbg:#3B2A10;--glass:rgba(17,30,28,.82);--shadow:0 1px 2px rgba(0,0,0,.35),0 8px 24px rgba(0,0,0,.35)}
+.phone{width:336px;height:700px;border-radius:48px;background:var(--bg);color:var(--ink);position:relative;overflow:hidden;
+box-shadow:0 0 0 7px #0C1312,0 0 0 8.5px #3B4A48,0 40px 60px -20px rgba(8,20,18,.55);font:500 14px/1.35 var(--font);flex:none;-webkit-font-smoothing:antialiased;letter-spacing:-.005em}
+.phone::before{content:"";position:absolute;top:10px;left:50%;transform:translateX(-50%);width:96px;height:28px;border-radius:14px;background:#000;z-index:40}
+.sb{position:absolute;top:0;left:0;right:0;height:46px;display:flex;justify-content:space-between;align-items:flex-end;padding:0 30px 7px;font-weight:700;font-size:14.5px;z-index:30;pointer-events:none}
+.sb .r{display:flex;gap:5px;align-items:center}
+.sb .bat{width:23px;height:11px;border:1.4px solid currentColor;border-radius:3.5px;position:relative;opacity:.9}
+.sb .bat::after{content:"";position:absolute;inset:1.5px;border-radius:1.5px;background:currentColor;right:5px}
+.sb.w{color:#fff}
+.hi{position:absolute;bottom:7px;left:50%;transform:translateX(-50%);width:120px;height:4.5px;border-radius:3px;background:var(--ink);opacity:.85;z-index:35}
+.pg{position:absolute;inset:46px 0 0 0;overflow:hidden}
+.pg.full{inset:0}
+.pad{padding:0 16px}
+.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none;vertical-align:middle}
+.ic.s{width:16px;height:16px}.ic.l{width:24px;height:24px}.ic.xl{width:30px;height:30px}
+.coin{display:inline-block;flex:none;width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#FFE79A,#EDAA1E 58%,#B97A00);position:relative;vertical-align:middle;box-shadow:inset 0 -1px 2px rgba(120,70,0,.4)}
+.coin::after{content:"";position:absolute;inset:3.5px;border-radius:50%;border:1.4px solid rgba(255,255,255,.55)}
+.coin.l{width:26px;height:26px}.coin.l::after{inset:6px;border-width:2px}.coin.xl{width:46px;height:46px}.coin.xl::after{inset:11px;border-width:3px}
+.glass{background:rgba(255,255,255,.2);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.28);color:#fff}
+/* header */
+.hd{display:flex;align-items:center;justify-content:space-between;padding:4px 16px 10px}
+.logo{font-weight:800;font-size:28px;letter-spacing:-.055em;line-height:1}
+.logo i{color:var(--brand);font-style:normal}
+.city{display:inline-flex;align-items:center;gap:3px;font-size:12.5px;font-weight:700;color:var(--ink2);margin-top:4px}
+.hr{display:flex;gap:8px;align-items:center}
+.gbtn{width:38px;height:38px;border-radius:50%;background:var(--sf);display:grid;place-items:center;box-shadow:var(--shadow);position:relative;flex:none;color:var(--ink)}
+.gbtn .dot{position:absolute;top:8px;right:9px;width:9px;height:9px;border-radius:50%;background:var(--like);border:2px solid var(--sf)}
+.gbtn.bare{background:transparent;box-shadow:none}
+.coinchip{height:38px;padding:0 12px 0 9px;border-radius:19px;background:var(--coinbg);color:var(--cointxt);font-weight:800;font-size:14px;display:flex;gap:6px;align-items:center}
+.av{width:30px;height:30px;border-radius:50%;background:var(--sf2) center/cover no-repeat;display:inline-block;flex:none;position:relative}
+.av.xs{width:22px;height:22px}.av.m{width:40px;height:40px}.av.l{width:52px;height:52px}.av.xl{width:92px;height:92px}.av.xxl{width:120px;height:120px}
+.av.me{width:38px;height:38px;box-shadow:0 0 0 2px var(--bg),0 0 0 3.5px var(--brand)}
+.stack{display:flex}.stack .av{margin-left:-9px;box-shadow:0 0 0 2px var(--sf)}.stack .av:first-child{margin-left:0}
+.stack.g .av{box-shadow:0 0 0 2px rgba(20,30,28,.9)}
+.stack .more{background:var(--sf2);display:inline-grid;place-items:center;font-size:11px;font-weight:800;color:var(--ink2)}
+.ver{width:15px;height:15px;border-radius:50%;background:var(--brand);color:var(--onbrand);display:inline-grid;place-items:center;vertical-align:-2px}
+.ver .ic{width:9px;height:9px;stroke-width:3.4}
+.tabs{display:flex;gap:20px;align-items:baseline;padding:0 16px}
+.tabs b{font-size:25px;font-weight:800;letter-spacing:-.04em}
+.tabs span{font-size:25px;font-weight:700;letter-spacing:-.04em;color:var(--ink3)}
+.search{display:flex;gap:9px;align-items:center;height:48px;background:var(--sf);border-radius:16px;padding:0 7px 0 14px;color:var(--ink3);font-size:15px;font-weight:500;box-shadow:var(--shadow)}
+.search .f{margin-left:auto;width:36px;height:36px;border-radius:12px;background:var(--sf2);display:grid;place-items:center;color:var(--ink);position:relative}
+.search .f em{position:absolute;top:-5px;right:-5px;min-width:17px;height:17px;border-radius:9px;background:var(--grad);color:#fff;font:800 10.5px/17px var(--font);text-align:center;font-style:normal}
+.days{display:flex;gap:6px;overflow:hidden}
+.day{flex:none;width:46px;height:62px;border-radius:17px;background:var(--sf);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-size:11px;font-weight:700;color:var(--ink3)}
+.day b{font-size:18px;font-weight:800;color:var(--ink);letter-spacing:-.02em}
+.day.on{background:var(--grad);color:rgba(255,255,255,.85);box-shadow:0 8px 18px rgba(10,127,117,.35)}.day.on b{color:#fff}
+.day i{width:4px;height:4px;border-radius:50%;background:var(--brand);margin-top:1px}.day.on i{background:#fff}
+.day.none i{opacity:0}
+.chips{display:flex;gap:7px;overflow:hidden;align-items:center}
+.chip{flex:none;height:36px;padding:0 14px;border-radius:18px;background:var(--sf);display:flex;align-items:center;gap:6px;font-weight:700;font-size:13.5px;color:var(--ink);box-shadow:var(--shadow)}
+.chip.on{background:var(--ink);color:var(--bg)}
+.chip.coinc{background:var(--coinbg);color:var(--cointxt);box-shadow:none}
+.chip.tn{background:var(--tint);color:var(--tintink);box-shadow:none}
+.drop{display:flex;align-items:center;gap:3px;font-weight:800;font-size:14px;flex:none;padding-right:6px}
+/* poster card */
+.f-padel{background-image:url(assets/photos/padel.jpg)}.f-padelteam{background-image:url(assets/photos/padel-team.jpg)}
+.f-board{background-image:url(assets/photos/boardgames.jpg)}.f-board2{background-image:url(assets/photos/boardgames2.jpg)}
+.f-hike{background-image:url(assets/photos/hike.jpg)}.f-hills{background-image:url(assets/photos/sunset-hills.jpg)}
+.f-spb{background-image:url(assets/photos/spb.jpg)}.f-jam{background-image:url(assets/photos/jam.jpg)}
+.f-pot{background-image:url(assets/photos/pottery.jpg)}.f-volley{background-image:url(assets/photos/volley.jpg)}
+.f-dinner{background-image:url(assets/photos/dinner.jpg)}.f-dinner2{background-image:url(assets/photos/dinner2.jpg)}
+.pc{position:relative;border-radius:30px;overflow:hidden;background-color:#123;background-size:cover;background-position:center;background-repeat:no-repeat;color:#fff;margin:0 16px;box-shadow:0 14px 30px rgba(13,31,29,.22)}
+.pc::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,12,10,.3) 0%,rgba(4,12,10,0) 28%,rgba(4,12,10,.42) 52%,rgba(4,12,10,.93) 100%)}
+.pc>*{position:absolute;z-index:2}
+.pc .top{top:12px;left:12px;right:12px;display:flex;justify-content:space-between;align-items:flex-start}
+.pc .bot{left:16px;right:16px;bottom:16px}
+.pc h3{font-size:23px;font-weight:800;letter-spacing:-.035em;line-height:1.1;text-shadow:0 1px 12px rgba(0,0,0,.3)}
+.pc .m{display:flex;gap:6px;align-items:center;font-size:13px;font-weight:600;color:rgba(255,255,255,.9);margin-top:6px}
+.pc .m .ic{opacity:.85}
+.dt{width:48px;border-radius:16px;text-align:center;padding:6px 0 7px;line-height:1}
+.dt small{display:block;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.9}
+.dt b{display:block;font-size:21px;font-weight:800;margin-top:3px;letter-spacing:-.03em}
+.hbtn{width:40px;height:40px;border-radius:50%;display:grid;place-items:center}
+.pill{height:28px;padding:0 11px;border-radius:14px;font-size:12.5px;font-weight:800;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.pill.gold{background:linear-gradient(135deg,#FFD66B,#EBA21A);color:#4A2D00}
+.pill.ok{background:var(--okbg);color:var(--ok)}.pill.warn{background:var(--warnbg);color:var(--warn)}.pill.br{background:var(--tint);color:var(--tintink)}.pill.gy{background:var(--sf2);color:var(--ink2)}
+.pill.solid-ok{background:#1BAA62;color:#fff}.pill.white{background:#fff;color:#0D1F1D}
+.cnt{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 6px 0 5px;border-radius:17px;font-weight:800;font-size:13.5px}
+.cnt .bar{width:34px;height:4px;border-radius:2px;background:rgba(255,255,255,.3);overflow:hidden;margin-right:6px}.cnt .bar i{display:block;height:100%;background:#fff;border-radius:2px}
+/* basics */
+.title{font-size:28px;font-weight:800;letter-spacing:-.04em;line-height:1.08}
+.h2{font-size:22px;font-weight:800;letter-spacing:-.035em;line-height:1.15}
+.h3{font-size:16px;font-weight:800;letter-spacing:-.02em}
+.mut{color:var(--ink2)}.mut3{color:var(--ink3)}.xs{font-size:12px}.sm{font-size:13px}
+.sp{display:flex;align-items:center;justify-content:space-between}
+.btn{height:54px;border-radius:27px;background:var(--grad);color:#fff;font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;gap:8px;width:100%;box-shadow:0 10px 22px rgba(10,127,117,.32);letter-spacing:-.01em}
+.btn.sec{background:var(--tint);color:var(--tintink);box-shadow:none}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn.sm{height:38px;border-radius:19px;font-size:13.5px;width:auto;padding:0 16px;box-shadow:none}
+.btn.gold{background:linear-gradient(135deg,#FFD66B,#EBA21A);color:#3F2600;box-shadow:0 10px 22px rgba(235,162,26,.35)}
+.btn.dis{background:var(--sf2);color:var(--ink3);box-shadow:none}
+.btn.dark{background:var(--ink);color:var(--bg);box-shadow:none}
+.tab{position:absolute;left:14px;right:14px;bottom:22px;height:68px;border-radius:34px;background:var(--glass);backdrop-filter:blur(24px) saturate(1.7);-webkit-backdrop-filter:blur(24px);box-shadow:0 18px 40px rgba(8,20,18,.16),0 2px 6px rgba(8,20,18,.06),inset 0 0 0 1px rgba(255,255,255,.6);display:flex;align-items:center;justify-content:space-between;padding:0 11px;z-index:25}
+.phone.dark .tab,body.alldark .phone:not(.light) .tab{box-shadow:0 18px 40px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.09)}
+.tab>div{flex:none;width:38px;height:44px;display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px;font-weight:800;letter-spacing:-.015em;color:var(--ink3);border-radius:22px;position:relative;white-space:nowrap}
+.tab>div .ic{width:23px;height:23px;stroke-width:1.8}
+.tab>.on{width:auto;padding:0 14px 0 12px;background:var(--tint);color:var(--tintink)}
+.tab>.on .ic{fill:currentColor;fill-opacity:.16}
+.tab .bdg{position:absolute;top:3px;right:1px;min-width:17px;height:17px;border-radius:9px;background:var(--like);color:#fff;font:800 10.5px/17px var(--font);text-align:center;padding:0 4px;box-shadow:0 0 0 2.5px var(--sf)}
+.fab{position:absolute;right:16px;bottom:100px;width:56px;height:56px;border-radius:50%;background:var(--grad);color:#fff;display:grid;place-items:center;box-shadow:0 14px 26px rgba(10,127,117,.45);z-index:20}
+.mapfab{position:absolute;left:50%;transform:translateX(-50%);bottom:100px;height:44px;padding:0 18px;border-radius:22px;background:var(--ink);color:var(--bg);font-weight:800;font-size:14px;display:flex;align-items:center;gap:8px;z-index:20;box-shadow:0 12px 26px rgba(0,0,0,.28)}
+.scrim{position:absolute;inset:0;background:rgba(5,12,11,.5);z-index:26}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:var(--bg);border-radius:32px 32px 0 0;padding:8px 18px 30px;z-index:27;box-shadow:0 -14px 40px rgba(0,0,0,.25)}
+.sheet.sf{background:var(--sf)}
+.grab{width:40px;height:5px;border-radius:3px;background:var(--line);margin:0 auto 14px}
+.row{display:flex;align-items:center;gap:13px;padding:12px 0}
+.row .g{flex:1;min-width:0}.row .g b{display:block;font-weight:800;font-size:15px;letter-spacing:-.015em}.row .g span{font-size:12.5px;color:var(--ink2);font-weight:500}
+.ico{width:42px;height:42px;border-radius:14px;background:var(--tint);color:var(--tintink);display:grid;place-items:center;flex:none}
+.ico.cn{background:var(--coinbg);color:var(--cointxt)}.ico.dk{background:var(--sf2);color:var(--ink)}
+.box{background:var(--sf);border-radius:22px;padding:14px 16px;box-shadow:var(--shadow)}
+.amt{font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.02em}.amt.plus{color:var(--ok)}
+.step{width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-weight:800;font-size:12.5px;flex:none}
+.prog{display:flex;gap:5px}.prog i{flex:1;height:5px;border-radius:3px;background:var(--sf2)}.prog i.on{background:var(--brand)}
+.field{background:var(--sf);border-radius:18px;padding:11px 16px;box-shadow:var(--shadow)}
+.field small{display:block;font-size:11.5px;color:var(--ink3);font-weight:700}.field b{font-weight:800;font-size:16px;letter-spacing:-.02em}
+.field.act{box-shadow:0 0 0 2px var(--brand)}
+.tile{background:var(--sf);border-radius:20px;padding:12px 14px;box-shadow:var(--shadow)}
+.tile small{display:flex;gap:6px;align-items:center;font-size:11.5px;color:var(--ink3);font-weight:700}.tile b{display:block;font-size:15.5px;font-weight:800;letter-spacing:-.02em;margin-top:3px}
+.sticky{position:absolute;left:12px;right:12px;bottom:22px;border-radius:34px;padding:9px 9px 9px 20px;background:var(--glass);backdrop-filter:blur(22px) saturate(1.6);-webkit-backdrop-filter:blur(22px);box-shadow:0 14px 34px rgba(8,20,18,.22),inset 0 0 0 1px rgba(255,255,255,.5);z-index:25;display:flex;gap:14px;align-items:center}
+.sticky .btn{height:50px;box-shadow:none}
+.toast{z-index:28;background:var(--ink);color:var(--bg);border-radius:24px;padding:12px 12px 12px 14px;display:flex;gap:12px;align-items:center;box-shadow:0 18px 36px rgba(0,0,0,.35)}
+/* chat */
+.bub{max-width:80%;padding:9px 14px;border-radius:22px;font-size:14.5px;line-height:1.3;font-weight:500}
+.bub.in{background:var(--sf);border-bottom-left-radius:7px;align-self:flex-start;box-shadow:var(--shadow)}
+.bub.out{background:var(--grad);color:#fff;border-bottom-right-radius:7px;align-self:flex-end}
+.bub small{display:block;font-size:10.5px;opacity:.6;text-align:right;margin-top:2px;font-weight:700}
+.bub .who{font-size:12px;font-weight:800;color:var(--brand);display:block;margin-bottom:2px}
+.msgs{display:flex;flex-direction:column;gap:7px;padding:0 14px}
+.sys{align-self:center;font-size:11.5px;font-weight:700;color:var(--ink2);background:var(--sf2);padding:4px 12px;border-radius:12px}
+.composer{position:absolute;left:0;right:0;bottom:0;padding:8px 12px 28px;display:flex;gap:8px;align-items:center;background:linear-gradient(transparent,var(--bg) 30%);z-index:20}
+.composer .in{flex:1;height:46px;border-radius:23px;background:var(--sf);box-shadow:var(--shadow);display:flex;align-items:center;padding:0 16px;color:var(--ink3);font-size:15px}
+.pinbar{margin:0 14px 10px;background:var(--glass);backdrop-filter:blur(18px);border-radius:18px;box-shadow:var(--shadow);display:flex;gap:11px;align-items:center;padding:9px 12px}
+.pinbar .seq{display:flex;flex-direction:column;gap:2px}.pinbar .seq i{width:3px;height:10px;border-radius:2px;background:var(--line)}.pinbar .seq i.on{background:var(--brand)}
+.unread{min-width:22px;height:22px;border-radius:11px;background:var(--grad);color:#fff;font:800 12px/22px var(--font);text-align:center;padding:0 7px;display:inline-block}
+.unread.mute{background:var(--sf2);color:var(--ink2)}
+.online::after{content:"";position:absolute;right:0;bottom:0;width:12px;height:12px;border-radius:50%;background:#2BD17E;border:2.5px solid var(--bg)}
+/* match */
+.mcard{position:absolute;left:14px;right:14px;top:0;bottom:0;border-radius:34px;overflow:hidden;box-shadow:0 20px 40px rgba(8,20,18,.3);background-color:#222;background-size:cover;background-repeat:no-repeat}
+.mcard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),transparent 25%,transparent 52%,rgba(4,10,9,.92))}
+.mcard>*{position:absolute;z-index:2}
+.mact{display:flex;justify-content:center;gap:16px;align-items:center}
+.mact .b{width:58px;height:58px;border-radius:50%;background:var(--sf);box-shadow:var(--shadow);display:grid;place-items:center}
+.mact .b.big{width:72px;height:72px;background:var(--grad);color:#fff;box-shadow:0 14px 28px rgba(10,127,117,.45)}
+.sk{background:linear-gradient(90deg,var(--sf2),var(--line),var(--sf2));background-size:200% 100%;border-radius:10px;animation:sk 1.4s infinite linear}
+@keyframes sk{to{background-position:-200% 0}}
+.empty{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:0 30px}
+.empty .bigic{width:92px;height:92px;border-radius:32px;background:var(--tint);color:var(--tintink);display:grid;place-items:center}
+/* map */
+.map{position:absolute;inset:0;background:#E4EEE8;overflow:hidden}
+.phone.dark .map,body.alldark .phone:not(.light) .map{background:#0F2220}
+.map::before{content:"";position:absolute;inset:-20%;background:
+linear-gradient(115deg,transparent 46%,#fff 46.5%,#fff 49%,transparent 49.5%),
+linear-gradient(35deg,transparent 58%,rgba(255,255,255,.85) 58.5%,rgba(255,255,255,.85) 60.5%,transparent 61%),
+linear-gradient(75deg,transparent 22%,rgba(255,255,255,.7) 22.5%,rgba(255,255,255,.7) 23.5%,transparent 24%),
+radial-gradient(circle at 72% 26%,#C8E6D2 0 74px,transparent 75px),radial-gradient(circle at 18% 72%,#C9E0F0 0 96px,transparent 97px)}
+.phone.dark .map::before,body.alldark .phone:not(.light) .map::before{background:
+linear-gradient(115deg,transparent 46%,rgba(255,255,255,.09) 46.5%,rgba(255,255,255,.09) 49%,transparent 49.5%),
+linear-gradient(35deg,transparent 58%,rgba(255,255,255,.07) 58.5%,rgba(255,255,255,.07) 60.5%,transparent 61%),
+radial-gradient(circle at 72% 26%,#12372B 0 74px,transparent 75px),radial-gradient(circle at 18% 72%,#112F40 0 96px,transparent 97px)}
+.mk{position:absolute;transform:translate(-50%,-100%);background:var(--sf);color:var(--ink);border-radius:18px;padding:4px 11px 4px 4px;font-weight:800;font-size:13px;display:flex;gap:6px;align-items:center;box-shadow:0 8px 18px rgba(0,0,0,.25);z-index:2}
+.mk::after{content:"";position:absolute;left:50%;bottom:-5px;width:12px;height:12px;background:inherit;transform:translateX(-50%) rotate(45deg);border-radius:3px;z-index:-1}
+.mk i{width:30px;height:30px;border-radius:50%;background-color:#123;background-size:cover;background-position:center;background-repeat:no-repeat}
+.mk.on{background:var(--ink);color:var(--bg);transform:translate(-50%,-100%) scale(1.14)}
+.mk.cl{padding:0;width:38px;height:38px;justify-content:center;border-radius:50%;background:var(--ink);color:var(--bg)}
+.me-dot{position:absolute;width:18px;height:18px;border-radius:50%;background:#2F7BF5;border:3.5px solid #fff;box-shadow:0 0 0 10px rgba(47,123,245,.22);z-index:2}
+.qr{width:210px;height:210px;border-radius:26px;background:#fff;padding:16px;display:grid;grid-template-columns:repeat(15,1fr);gap:1px;margin:0 auto;box-shadow:0 20px 40px rgba(8,20,18,.18)}
+.qr i{background:#0B1514;border-radius:1.5px}.qr i.w{background:transparent}
+.post{background:var(--sf);border-radius:28px;box-shadow:var(--shadow);margin:0 14px 12px;overflow:hidden}
+.pr{padding:12px 14px;display:flex;gap:10px;align-items:center}
+.stories{display:flex;gap:11px;overflow:hidden}
+.stories>div{text-align:center;font-size:11.5px;font-weight:700;color:var(--ink2);width:64px;flex:none}
+.stories .ring{width:64px;height:64px;border-radius:50%;padding:3px;background:conic-gradient(from 200deg,#14BFAE,#F2B73D,#F0505A,#14BFAE);display:grid;place-items:center;margin-bottom:4px}
+.stories .ring .av{width:100%;height:100%;box-shadow:0 0 0 3px var(--bg)}
+.stories .ring.seen{background:var(--line)}
+.prod{background:var(--sf);border-radius:24px;box-shadow:var(--shadow);overflow:hidden}
+.prod .im{height:118px;display:grid;place-items:center;color:#fff;position:relative}
+.prod .im svg{width:60px;height:60px;fill:currentColor;filter:drop-shadow(0 8px 10px rgba(0,0,0,.22))}
+.prod .pb{padding:10px 12px 13px}
+.g1{background:linear-gradient(140deg,#0E9F90,#0B5F66)}.g2{background:linear-gradient(140deg,#F4A53B,#E2693C)}.g3{background:linear-gradient(140deg,#6C5CE7,#B04DC4)}.g4{background:linear-gradient(140deg,#2E7BEA,#17B6D6)}
+.xp{height:9px;border-radius:5px;background:var(--sf2);overflow:hidden}.xp i{display:block;height:100%;border-radius:5px;background:var(--grad)}
+.wcard{border-radius:30px;padding:20px;color:#fff;position:relative;overflow:hidden;background:radial-gradient(circle at 85% 0%,rgba(255,214,107,.45),transparent 45%),radial-gradient(circle at 0% 100%,rgba(63,224,204,.35),transparent 50%),linear-gradient(150deg,#0D3C38,#0A7F75);box-shadow:0 20px 40px rgba(10,127,117,.35)}
+.rail{display:flex;gap:10px;overflow:hidden;padding:0 16px}
+.sq{flex:none;width:132px;height:172px;border-radius:24px;background-color:#123;background-size:cover;background-position:center;background-repeat:no-repeat;position:relative;color:#fff;overflow:hidden}
+.sq::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(4,12,10,.88))}
+.sq>*{position:absolute;z-index:2}
+.ptile{position:relative;border-radius:22px;overflow:hidden;background-color:#123;background-size:cover;background-position:center;background-repeat:no-repeat;height:112px;color:#fff;display:flex;align-items:flex-end;padding:10px 12px;font-weight:800;letter-spacing:-.02em;font-size:15px}
+.ptile{isolation:isolate}.ptile::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(4,12,10,.85));z-index:-1}
+.ptile>*{position:relative;z-index:2}.ptile.on::before{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 3px #2FE0CB;border-radius:22px;z-index:3}
+.ptile .ck{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;background:#2FE0CB;color:#032;display:grid;place-items:center;z-index:4}
+/* spec box for design system */
+.phone.spec{width:auto;height:auto;border-radius:26px;box-shadow:none;padding:22px;display:flex;flex-direction:column;gap:18px;overflow:visible}
+.phone.spec::before{display:none}
+.phone.spec .lab{font:800 11px var(--font);color:var(--ink3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px}
+.phone.spec .rw{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="side">
+  <div class="brand">Я<i>?</i>За!</div>
+  <small>Дизайн приложения · v2</small>
+  <a href="#s2">Онбординг</a>
+  <a href="#s3">События</a>
+  <a href="#s4">ЯзаКоин</a>
+  <a href="#s5">ЯзаМэтч</a>
+  <a href="#s6">Чаты</a>
+  <a href="#s7">Лента · Маркет · Учёба</a>
+  <a href="#s8">Профиль · Уведомления</a>
+  <a href="#s9">Состояния</a>
+  <button class="tog" id="tog">Все экраны: тёмная тема</button>
+</aside>
+<main>
+<section id="s2" style="padding-top:0">
+  <h2>Онбординг</h2>
+  <p class="lead">Три шага: знакомство, интересы, город и разрешения. Разрешения запрашиваем с объяснением, а не пачкой.</p>
+  <div class="stage">
+    <figure class="fig"><div class="phone" id="m-onb1"><sb></sb><div class="pg">
+      <div class="hd"><span class="logo">Я<i>?</i>За!</span><span class="mut sm" style="font-weight:800">Пропустить</span></div>
+      <div style="position:relative;height:370px;margin-top:6px">
+        <div class="f-hike" style="position:absolute;left:18px;top:38px;width:170px;height:230px;border-radius:30px;background-size:cover;background-position:30% 50%;transform:rotate(-7deg);box-shadow:0 20px 36px rgba(13,31,29,.3)"></div>
+        <div class="f-padel" style="position:absolute;right:16px;top:8px;width:160px;height:210px;border-radius:30px;background-size:cover;background-position:50% 40%;transform:rotate(6deg);box-shadow:0 20px 36px rgba(13,31,29,.3)"></div>
+        <div class="f-board" style="position:absolute;left:76px;top:170px;width:190px;height:170px;border-radius:30px;background-size:cover;transform:rotate(-2deg);box-shadow:0 24px 40px rgba(13,31,29,.38);border:4px solid var(--bg)"></div>
+        <span class="pill gold" style="position:absolute;right:26px;top:230px;transform:rotate(5deg);box-shadow:0 10px 20px rgba(235,162,26,.4)"><span class="coin"></span>+300</span>
+        <div class="stack" style="position:absolute;left:30px;top:300px"><pp n="44" c="m"></pp><pp n="60" c="m"></pp><pp n="16" c="m"></pp></div>
+      </div>
+      <div class="pad" style="margin-top:8px"><div class="title" style="font-size:31px">Найди компанию на вечер</div><p class="mut" style="margin-top:9px;font-size:15px;font-weight:500">Спорт, настолки, прогулки и учёба рядом с тобой. Запись — в одно касание.</p></div>
+      <div class="pad" style="position:absolute;bottom:30px;left:0;right:0"><div class="prog" style="margin-bottom:16px;width:90px"><i class="on"></i><i></i><i></i></div><div class="btn">Дальше</div></div>
+    </div></div>
+    <figcaption><strong>1 · Знакомство</strong>Коллаж из реальных событий вместо иллюстрации. «Пропустить» всегда виден.</figcaption></figure>
+
+    <figure class="fig"><div class="phone" id="m-onb2"><sb></sb><div class="pg">
+      <div class="hd" style="padding-bottom:0"><span class="gbtn"><ic n="chevl"></ic></span><span class="mut sm" style="font-weight:800">Пропустить</span></div>
+      <div class="pad" style="margin-top:12px"><div class="prog"><i class="on"></i><i class="on"></i><i></i></div><div class="title" style="margin-top:16px">Что тебе интересно?</div><p class="mut sm" style="margin-top:6px">Выбери хотя бы 3 — так лента станет точнее</p></div>
+      <div class="pad" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px">
+        <div class="ptile f-padel on"><span class="ck"><ic n="check" c="s"></ic></span>Падел</div><div class="ptile f-board on"><span class="ck"><ic n="check" c="s"></ic></span>Настолки</div>
+        <div class="ptile f-hike">Походы</div><div class="ptile f-jam">Музыка</div>
+        <div class="ptile f-pot on"><span class="ck"><ic n="check" c="s"></ic></span>Гончарка</div><div class="ptile f-volley">Волейбол</div>
+        <div class="ptile f-dinner">Ужины</div><div class="ptile f-spb">Прогулки</div></div>
+      <div class="pad" style="position:absolute;bottom:30px;left:0;right:0"><div class="btn">Дальше · выбрано 3</div></div>
+    </div></div>
+    <figcaption><strong>2 · Интересы</strong>Плитки с фото вместо серого списка — выбирать приятнее и быстрее.</figcaption></figure>
+
+    <figure class="fig"><div class="phone" id="m-onb3"><sb w></sb><div class="pg full">
+      <div class="f-spb" style="position:absolute;inset:0 0 auto 0;height:330px;background-size:cover;background-position:50% 60%"><div style="position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.25),transparent 40%,var(--bg))"></div></div>
+      <div style="position:absolute;top:58px;left:16px"><span class="gbtn"><ic n="chevl"></ic></span></div>
+      <div class="pad" style="position:absolute;top:250px;left:0;right:0"><div class="prog" style="margin-bottom:14px"><i class="on"></i><i class="on"></i><i class="on"></i></div><div class="title">Где ты?</div>
+        <div class="field act" style="margin-top:14px;display:flex;align-items:center;gap:10px"><ic n="pin" style="color:var(--brand)"></ic><div style="flex:1"><small>Город</small><b>Москва</b></div><ic n="chevd" c="s"></ic></div>
+        <div class="box" style="margin-top:12px;display:grid;gap:14px">
+          <div style="display:flex;gap:12px;align-items:center"><div class="ico"><ic n="nav"></ic></div><div style="flex:1"><b>Геолокация</b><div class="mut xs">События рядом и подтверждение визита</div></div></div>
+          <div style="display:flex;gap:12px;align-items:center"><div class="ico"><ic n="bell"></ic></div><div style="flex:1"><b>Уведомления</b><div class="mut xs">Напоминания и ответы в чатах</div></div></div></div></div>
+      <div class="pad" style="position:absolute;bottom:30px;left:0;right:0;display:grid;gap:4px"><div class="btn">Разрешить и продолжить</div><div class="btn ghost" style="box-shadow:none;height:42px">Не сейчас</div></div>
+    </div></div>
+    <figcaption><strong>3 · Город и разрешения</strong>Сначала объясняем «зачем», потом системное окно. Есть «Не сейчас».</figcaption></figure>
+  </div>
+</section>
+
+<section id="s3">
+  <h2>События</h2>
+  <p class="lead">Главный экран: что происходит сегодня рядом и как записаться за пару касаний.</p>
+  <div class="stage">
+    <figure class="fig"><div class="phone" id="m-feed"><sb></sb><div class="pg">
+      <div class="hd"><div><span class="logo">Я<i>?</i>За!</span><br><span class="city"><ic n="pin" c="s"></ic>Москва<ic n="chevd" c="s"></ic></span></div>
+        <div class="hr"><span class="coinchip"><span class="coin"></span>1 250</span><span class="gbtn"><ic n="bell"></ic><i class="dot"></i></span><pp n="12" c="me"></pp></div></div>
+      <div class="tabs" style="justify-content:space-between;align-items:center"><div style="display:flex;gap:18px;align-items:baseline"><b>События</b><span>Учёба</span></div><span class="gbtn" style="background:var(--grad);color:#fff;box-shadow:0 8px 18px rgba(10,127,117,.35)"><ic n="plus"></ic></span></div>
+      <div class="pad" style="margin-top:10px;display:flex;gap:8px"><div class="search" style="flex:1"><ic n="search"></ic>Найти событие<span class="f"><ic n="sliders" c="s"></ic><em>2</em></span></div><span class="gbtn" style="width:48px;height:48px;border-radius:16px"><ic n="map"></ic></span></div>
+      <div class="pad" style="margin-top:10px"><div class="days"><div class="day on">Вс<b>13</b><i></i></div><div class="day">Пн<b>14</b><i></i></div><div class="day">Вт<b>15</b><i></i></div><div class="day none">Ср<b>16</b><i></i></div><div class="day">Чт<b>17</b><i></i></div><div class="day">Пт<b>18</b><i></i></div></div></div>
+      <div class="pad" style="margin-top:10px"><div class="chips"><span class="drop">Все<ic n="chevd" c="s"></ic></span><span class="chip coinc"><span class="coin"></span>За коины</span><span class="chip tn">Бесплатно</span><span class="chip">Для детей</span><span class="chip">Популярно</span></div></div>
+      <div class="pc f-board" style="margin-top:12px;height:262px;background-position:50% 30%">
+        <div class="top"><div style="display:flex;gap:8px;align-items:flex-start"><div class="dt glass"><small>Вс</small><b>13</b></div><span class="pill gold" style="margin-top:2px"><span class="coin"></span>до 300</span></div><span class="hbtn glass"><ic n="heart"></ic></span></div>
+        <div class="bot"><h3>Вечер настольных игр</h3><div class="m"><ic n="clock" c="s"></ic>Сегодня, 19:00 · Хамовники</div>
+          <div class="sp" style="margin-top:10px"><div class="stack g"><pp n="44" c="xs"></pp><pp n="60" c="xs"></pp><pp n="16" c="xs"></pp><span class="av xs more" style="font-size:9px">+9</span></div><span class="cnt glass">12 / 20<span class="bar" style="margin:0 4px 0 2px"><i style="width:60%"></i></span></span></div></div></div>
+      <tabbar a="0"></tabbar>
+    </div></div>
+    <figcaption><strong>Лента · светлая</strong><ul><li>Афиша вместо карточки с мелким текстом: фото, дата-плитка, награда, участники.</li><li>«Создать» в одной строке с разделами — рядом, но не мешает.</li><li>Карта — кнопка у поиска. Баланс коинов — в шапке.</li></ul></figcaption></figure>
+
+    <figure class="fig"><div class="phone dark" id="m-feed-dark"><sb></sb><div class="pg">
+      <div class="pad" style="padding-top:6px;display:flex;gap:8px"><div class="search" style="flex:1"><ic n="search"></ic>Найти событие<span class="f"><ic n="sliders" c="s"></ic><em>2</em></span></div><span class="gbtn" style="width:48px;height:48px;border-radius:16px"><ic n="map"></ic></span></div>
+      <div class="pad" style="margin-top:10px"><div class="days"><div class="day">Вс<b>13</b><i></i></div><div class="day on">Пн<b>14</b><i></i></div><div class="day">Вт<b>15</b><i></i></div><div class="day none">Ср<b>16</b><i></i></div><div class="day">Чт<b>17</b><i></i></div><div class="day">Пт<b>18</b><i></i></div></div></div>
+      <div class="pc f-padelteam" style="margin-top:12px;height:312px;background-position:50% 40%">
+        <div class="top"><div style="display:flex;gap:8px"><div class="dt glass"><small>Ср</small><b>16</b></div><span class="pill white" style="margin-top:2px;height:26px">Реклама</span></div><span class="hbtn glass"><ic n="heart"></ic></span></div>
+        <div class="bot"><h3>Парный падел после работы</h3><div class="m"><ic n="clock" c="s"></ic>14:00 · Москва · 600 ₽</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:10px;font-size:13px;font-weight:700"><pp n="60" c="xs"></pp>Клуб «Спин» <span class="ver"><ic n="check"></ic></span><span style="margin-left:auto;display:flex;gap:4px;align-items:center"><ic n="star" c="s" style="color:#FFC53D"></ic>4,9</span></div>
+          <div class="sp" style="margin-top:10px"><div class="stack g"><pp n="44" c="xs"></pp><pp n="16" c="xs"></pp><pp n="5" c="xs"></pp></div><span class="cnt glass" style="padding-left:12px">Осталось 3 места</span></div></div></div>
+      <div class="pc f-hike" style="margin-top:12px;height:300px"><div class="top"><span class="pill solid-ok"><ic n="check" c="s"></ic>Иду</span></div></div>
+      <tabbar a="0"></tabbar>
+    </div></div>
+    <figcaption><strong>Лента · тёмная · шапка свёрнута</strong><ul><li>При скролле шапка уходит, остаются поиск и даты.</li><li>Реклама — явная белая плашка «Реклама» на фото.</li><li>Мои события отмечены зелёной плашкой «Иду».</li></ul></figcaption></figure>
+
+    <figure class="fig"><div class="phone" id="m-filter"><sb></sb><div class="pg">
+      <div style="opacity:.5"><div class="hd"><span class="logo">Я<i>?</i>За!</span></div><div class="pad"><div class="search"><ic n="search"></ic>Найти событие</div></div></div>
+      <div class="scrim"></div>
+      <div class="sheet" style="top:62px"><div class="grab"></div>
+        <div class="sp"><div class="h2">Фильтры</div><span style="color:var(--brand);font-weight:800">Сбросить</span></div>
+        <div class="h3" style="margin-top:16px">Категория</div>
+        <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:9px"><span class="chip on">Спорт</span><span class="chip on">Настолки</span><span class="chip">Походы</span><span class="chip">Музыка</span><span class="chip">Творчество</span><span class="chip">Ещё 9</span></div>
+        <div class="h3" style="margin-top:16px">Цена</div>
+        <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:9px"><span class="chip">Любая</span><span class="chip on">Бесплатно</span><span class="chip">до 500 ₽</span><span class="chip">Платно</span></div>
+        <div class="h3" style="margin-top:16px">Возраст</div>
+        <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:9px"><span class="chip">6+</span><span class="chip">12+</span><span class="chip on">18+</span><span class="chip">Для детей</span></div>
+        <div class="row" style="margin-top:6px"><div class="ico cn"><span class="coin"></span></div><div class="g"><b>Только за коины</b><span>Есть награда от партнёра</span></div><span style="width:52px;height:32px;border-radius:16px;background:var(--grad);position:relative"><i style="position:absolute;right:3px;top:3px;width:26px;height:26px;border-radius:50%;background:#fff"></i></span></div>
+        <div class="row" style="padding-top:2px"><div class="ico"><ic n="pin"></ic></div><div class="g"><b>Радиус 5 км</b><span>от центра Москвы</span></div></div>
+        <div class="btn" style="margin-top:6px">Показать 18 событий</div></div>
+    </div></div>
+    <figcaption><strong>Фильтры</strong><ul><li>Один шит вместо россыпи переключателей; счётчик на поиске показывает, сколько фильтров включено.</li><li>Кнопка показывает результат заранее: «18 событий».</li></ul></figcaption></figure>
+
+    <figure class="fig"><div class="phone" id="m-map"><sb></sb><div class="pg">
+      <div class="map">
+        <div class="me-dot" style="left:160px;top:400px"></div>
+        <div class="mk" style="left:96px;top:210px"><i class="f-board" style="background-size:cover"></i>Игры</div>
+        <div class="mk on" style="left:206px;top:300px"><i class="f-padel" style="background-size:cover"></i>600 ₽</div>
+        <div class="mk" style="left:262px;top:176px"><i class="f-hike" style="background-size:cover"></i>Free</div>
+        <div class="mk cl" style="left:112px;top:330px">4</div>
+        <div class="mk" style="left:90px;top:460px"><i class="f-jam" style="background-size:cover"></i>300 ₽</div>
+      </div>
+      <div style="position:absolute;top:6px;left:14px;right:14px;display:flex;gap:8px;z-index:5"><span class="gbtn" style="width:48px;height:48px;border-radius:16px"><ic n="chevl"></ic></span><div class="search" style="flex:1"><ic n="search" c="s"></ic>В этой области<span class="f"><ic n="sliders" c="s"></ic></span></div></div>
+      <div style="position:absolute;right:14px;top:66px;z-index:5"><span class="gbtn" style="width:44px;height:44px"><ic n="nav" c="s"></ic></span></div>
+      <div class="box" style="position:absolute;left:14px;right:14px;bottom:100px;z-index:6;display:flex;gap:12px;padding:10px;border-radius:26px"><div class="f-padel" style="width:92px;height:92px;border-radius:18px;background-size:cover;flex:none"></div><div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center"><div class="h3" style="font-size:16px">Парный падел после работы</div><div class="mut sm" style="margin-top:3px">Ср, 14:00 · 600 ₽</div><div class="sp" style="margin-top:8px"><span class="xs mut3" style="font-weight:700"><ic n="pin" c="s"></ic> 1,2 км</span><span class="pill br" style="height:24px">1 / 4</span></div></div></div>
+      <tabbar a="0"></tabbar>
+    </div></div>
+    <figcaption><strong>Карта</strong><ul><li>Маркеры с фото и ценой; кластер — число событий.</li><li>Мини-карточка снизу открывает полный экран.</li></ul></figcaption></figure>
+  </div>
+
+  <h3 style="margin:42px 0 4px;font-size:21px;letter-spacing:-.03em">Событие</h3>
+  <div class="stage">
+    <figure class="fig"><div class="phone" id="m-event"><sb w></sb><div class="pg full">
+      <div class="f-board" style="position:absolute;inset:0 0 auto 0;height:380px;background-size:cover;background-position:50% 30%"><div style="position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.35),transparent 30%,rgba(4,12,10,.85) 95%)"></div></div>
+      <div style="position:absolute;top:56px;left:16px;right:16px;display:flex;justify-content:space-between;z-index:3"><span class="hbtn glass"><ic n="chevl"></ic></span><div style="display:flex;gap:8px"><span class="hbtn glass"><ic n="share" c="s"></ic></span><span class="hbtn glass"><ic n="heart"></ic></span></div></div>
+      <div style="position:absolute;top:226px;left:18px;right:18px;color:#fff;z-index:3"><div style="display:flex;gap:6px;margin-bottom:10px"><span class="pill glass" style="height:26px">Настольные игры</span><span class="pill glass" style="height:26px">18+</span></div><div class="title" style="font-size:31px;text-shadow:0 2px 16px rgba(0,0,0,.35)">Вечер настольных игр</div></div>
+      <div style="position:absolute;top:346px;left:0;right:0;bottom:0;background:var(--bg);border-radius:32px 32px 0 0;padding:18px 16px 0">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div class="tile"><small><ic n="calendar" c="s"></ic>Сегодня</small><b>19:00–22:00</b></div><div class="tile"><small><ic n="pin" c="s"></ic>1,2 км</small><b>Клуб «Ход»</b></div></div>
+        <div class="row" style="margin-top:6px"><pp n="44" c="l"></pp><div class="g"><b>Маша <span class="ver"><ic n="check"></ic></span></b><span><ic n="star" c="s" style="color:#F0A81C"></ic> 4,8 · 24 отзыва · 18 событий</span></div><span class="btn sec sm">Профиль</span></div>
+        <div class="sp" style="margin-top:4px"><div class="h3">Идут · 12</div><span class="sm" style="color:var(--brand);font-weight:800">Все</span></div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:10px"><div class="stack"><pp n="60" c="m"></pp><pp n="16" c="m"></pp><pp n="5" c="m"></pp><pp n="12" c="m"></pp><pp n="32" c="m"></pp><span class="av m more">+7</span></div></div>
+        <div class="box" style="margin-top:14px;background:linear-gradient(135deg,#FFE9A8,#F7C65A);box-shadow:none;display:flex;align-items:center;gap:12px;color:#3F2600"><span class="coin l"></span><div style="flex:1"><b style="font-size:16px;font-weight:800">До 300 ЯзаКоин</b><div class="xs" style="font-weight:700;opacity:.8">Задание клуба «Ход»</div></div><ic n="chevr"></ic></div>
+      </div>
+      <div class="sticky"><div style="flex:none"><div class="h3" style="font-size:18px">Бесплатно</div><div class="xs mut" style="font-weight:700">Осталось 8 мест</div></div><div class="btn" style="flex:1">Иду</div></div>
+    </div></div>
+    <figcaption><strong>Событие</strong><ul><li>Фото на весь верх, название поверх — как афиша.</li><li>Когда и где — в двух плитках, организатор и участники сразу под ними.</li><li>Плавающая стеклянная панель с ценой и кнопкой «Иду».</li></ul></figcaption></figure>
+
+    <figure class="fig"><div class="phone" id="m-event-people"><sb></sb><div class="pg">
+      <div class="hd"><span class="gbtn"><ic n="chevl"></ic></span><div style="text-align:center"><div class="h3">Участники</div><div class="xs mut3" style="font-weight:700">12 из 20 мест</div></div><span class="gbtn"><ic n="share" c="s"></ic></span></div>
+      <div class="tabs" style="gap:16px;margin-top:2px"><b style="font-size:17px">Идут 12</b><span style="font-size:17px">Хотят 5</span><span style="font-size:17px">Ожидают</span></div>
+      <div class="pad" style="margin-top:8px">
+        <div class="row"><pp n="44" c="l"></pp><div class="g"><b>Маша <span class="ver"><ic n="check"></ic></span></b><span>4,8 · 18 событий</span></div><span class="pill br">Организатор</span></div>
+        <div class="row"><pp n="60" c="l"></pp><div class="g"><b>Артём К.</b><span>4,9 · 12 визитов</span></div><span class="btn sec sm">Написать</span></div>
+        <div class="row"><pp n="16" c="l"></pp><div class="g"><b>Катя Т.</b><span>5,0 · 3 визита</span></div><span class="btn sec sm">Написать</span></div>
+        <div class="row"><pp n="5" c="l"></pp><div class="g"><b>Алина</b><span>Новичок</span></div><span class="btn sec sm">Написать</span></div>
+        <div class="row"><pp n="12" c="l"></pp><div class="g"><b>Игорь Ш.</b><span>4,7 · 7 визитов</span></div><span class="btn sec sm">Написать</span></div>
+      </div>
+      <div class="sticky" style="padding-left:9px"><div class="btn dark"><ic n="chat" c="s"></ic>Открыть чат события</div></div>
+    </div></div>
+    <figcaption><strong>Участники</strong><ul><li>Идут / хотят / ожидают — три списка.</li><li>Рейтинг и число визитов помогают решить «идти ли».</li></ul></figcaption></figure>
+
+    <figure class="fig"><div class="phone" id="m-create"><sb></sb><div class="pg">
+      <div class="hd"><span class="gbtn"><ic n="x"></ic></span><span class="h3">Новое событие</span><span class="mut sm" style="font-weight:800;width:38px;text-align:right">Черн.</span></div>
+      <div class="pad"><div class="prog"><i class="on"></i><i class="on"></i><i></i><i></i></div><div class="xs mut3" style="margin-top:8px;font-weight:800;letter-spacing:.05em">ШАГ 2 ИЗ 4</div>
+      <div class="title" style="margin-top:6px;font-size:26px">Когда и где встречаемся?</div>
+      <div style="display:grid;gap:10px;margin-top:16px">
+        <div style="display:flex;gap:10px"><div class="field act" style="flex:1"><small>Дата</small><b>Вс, 13 сентября</b></div><div class="field" style="width:106px"><small>Начало</small><b>19:00</b></div></div>
+        <div class="field"><small>Длительность</small><b>3 часа</b></div>
+        <div class="field" style="display:flex;align-items:center;gap:10px"><ic n="pin" style="color:var(--brand)"></ic><div style="flex:1"><small>Место</small><b>Клуб «Ход», Хамовники</b></div><ic n="chevr" c="s"></ic></div>
+        <div style="display:flex;gap:10px"><div class="field" style="flex:1"><small>Мест</small><b>20</b></div><div class="field" style="flex:1"><small>Цена</small><b>Бесплатно</b></div></div>
+        <div class="row" style="padding:4px 2px 0"><div class="g"><b>Одобрять заявки</b><span>Иначе запись сразу подтверждается</span></div><span style="width:52px;height:32px;border-radius:16px;background:var(--sf2);position:relative"><i style="position:absolute;left:3px;top:3px;width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:var(--shadow)"></i></span></div>
+      </div></div>
+      <div style="position:absolute;left:0;right:0;bottom:0;padding:12px 16px 28px;display:flex;gap:10px;background:linear-gradient(transparent,var(--bg) 35%)"><div class="btn ghost" style="width:100px">Назад</div><div class="btn" style="flex:1">Дальше</div></div>
+    </div></div>
+    <figcaption><strong>Создание · 4 шага</strong><ul><li>Что · Когда и где · Для кого · Предпросмотр.</li><li>Черновик сохраняется автоматически.</li><li>Предпросмотр — та самая афиша, какую увидят в ленте.</li></ul></figcaption></figure>
+  </div>
+</section>
+<section id="s4">
+  <h2>ЯзаКоин и задания партнёров</h2>
+  <p class="lead">Коины — золотые, отдельно от бирюзовых действий. Задание понятно по шагам: начать, выполнить, показать QR, получить награду.</p>
+  <div class="stage">
+    <figure class="fig"><div class="phone" id="m-task"><sb w></sb><div class="pg full">
+      <div class="f-board" style="position:absolute;inset:0 0 auto 0;height:260px;background-size:cover"></div>
+      <div class="scrim" style="z-index:5"></div>
+      <div class="sheet sf" style="z-index:6;padding-bottom:24px"><div class="grab"></div>
+        <div class="sp"><div class="h2">Задание партнёра</div><span class="gbtn" style="background:var(--sf2);box-shadow:none;width:34px;height:34px"><ic n="x" c="s"></ic></span></div>
+        <div style="display:flex;gap:10px;align-items:center;margin-top:6px"><span class="av m" style="background:#0E2C2A;display:inline-grid;place-items:center;color:#fff"><ic n="users" c="s"></ic></span><div><b style="font-size:15px">Клуб «Ход»</b><div class="xs mut">Вечер настольных игр</div></div></div>
+        <div style="margin-top:14px;border-radius:26px;padding:16px 18px;background:linear-gradient(135deg,#FFE7A0,#F4B93C);display:flex;gap:14px;align-items:center;color:#3F2600;box-shadow:0 14px 28px rgba(235,162,26,.3)"><span class="coin xl"></span><div><div style="font-size:27px;font-weight:800;letter-spacing:-.04em;line-height:1">до 300</div><div style="font-weight:800;font-size:13px;margin-top:3px">ЯзаКоин после подтверждения</div></div></div>
+        <div style="margin-top:8px">
+          <div class="row" style="padding:10px 0"><div class="ico dk"><ic n="flag"></ic></div><div class="g"><b>Посети встречу</b><span>Подтверждение после окончания</span></div><span class="amt" style="color:var(--cointxt)">+200</span></div>
+          <div class="row" style="padding:10px 0"><div class="ico dk"><ic n="trophy"></ic></div><div class="g"><b>Сыграй в турнир</b><span>Дополнительное задание на месте</span></div><span class="amt" style="color:var(--cointxt)">+100</span></div></div>
+        <div style="display:grid;gap:9px;margin-top:6px;font-weight:600;font-size:13.5px"><div style="display:flex;gap:10px;align-items:center"><span class="step">1</span>Нажми «Начать» — задание закрепится за тобой</div><div style="display:flex;gap:10px;align-items:center"><span class="step">2</span>Выполни условия на встрече</div><div style="display:flex;gap:10px;align-items:center"><span class="step">3</span>Покажи сотруднику QR — коины придут сразу</div></div>
+        <div class="btn" style="margin-top:16px">Начать задание</div>
+        <div class="sp xs mut" style="margin-top:12px;font-weight:700"><span>Условия и сроки</span><ic n="chevd" c="s"></ic></div>
+      </div></div></div>
+    <figcaption><strong>Задание · старт</strong><ul><li>Награда — золотой блок, суммы по пунктам — справа.</li><li>Три шага объяснены простыми словами.</li></ul></figcaption></figure>
+
+    <figure class="fig"><div class="phone dark" id="m-qr" style="background:#06201D"><sb w></sb><div class="pg full" style="background:radial-gradient(circle at 50% 18%,rgba(47,224,203,.28),transparent 55%),linear-gradient(180deg,#0B3430,#05191780 70%,#051917)">
+      <div class="hd" style="padding-top:52px"><span class="gbtn glass" style="box-shadow:none"><ic n="chevl"></ic></span><span style="font-weight:800;color:#fff">Задание активно</span><span style="width:38px"></span></div>
+      <div style="text-align:center;color:#fff;padding:0 22px"><span class="pill glass" style="height:30px;margin-top:4px"><ic n="clock" c="s"></ic>до 22:00</span>
+        <div class="title" style="margin-top:14px;font-size:26px">Покажите QR сотруднику клуба</div><p style="margin-top:6px;opacity:.7;font-size:13.5px;font-weight:500">Код одноразовый · обновится через 0:42</p>
+        <div class="qr" id="qrbox" style="margin-top:22px"></div>
+        <div class="glass" style="margin-top:24px;border-radius:24px;padding:6px 14px;text-align:left"><div class="row" style="padding:9px 0"><span class="ico" style="background:rgba(47,224,203,.2);color:#6FF0DE"><ic n="check"></ic></span><div class="g"><b style="color:#fff">Посетил встречу</b><span style="color:rgba(255,255,255,.65)">Ждём подтверждения</span></div><span class="amt" style="color:#FFD66B">+200</span></div><div class="row" style="padding:9px 0"><span class="ico" style="background:rgba(255,255,255,.1);color:#fff"><ic n="trophy"></ic></span><div class="g"><b style="color:#fff">Сыграл в турнир</b><span style="color:rgba(255,255,255,.65)">Не выполнено</span></div><span class="amt" style="color:rgba(255,255,255,.5)">+100</span></div></div>
+      </div>
+    </div></div>
+    <figcaption><strong>Задание · QR</strong><ul><li>Тёмный экран с яркой плиткой QR — читается с любой камеры.</li><li>Прогресс по каждому пункту виден до подтверждения.</li></ul></figcaption></figure>
+
+    <figure class="fig"><div class="phone" id="m-wallet"><sb></sb><div class="pg">
+      <div class="hd"><span class="gbtn"><ic n="chevl"></ic></span><span class="h3">ЯзаКоин</span><span class="gbtn"><ic n="info" c="s"></ic></span></div>
+      <div class="pad"><div class="wcard"><div class="xs" style="opacity:.8;font-weight:800;letter-spacing:.06em">БАЛАНС</div><div style="display:flex;gap:10px;align-items:center;margin-top:4px"><span class="coin l" style="width:34px;height:34px"></span><span style="font-size:44px;font-weight:800;letter-spacing:-.05em;line-height:1">1 250</span></div>
+        <div class="xs" style="margin-top:14px;display:inline-flex;gap:6px;align-items:center;background:rgba(255,255,255,.14);padding:6px 11px;border-radius:12px;font-weight:700"><ic n="clock" c="s"></ic>150 сгорят 30 ноября</div>
+        <div style="display:flex;gap:8px;margin-top:16px"><div class="btn sm" style="background:#fff;color:#0A5B54;flex:1;height:42px;font-weight:800">Заработать</div><div class="btn sm glass" style="flex:1;height:42px;font-weight:800">В маркет</div></div></div>
+      <div class="chips" style="margin-top:14px"><span class="chip on">Все</span><span class="chip">Начислено</span><span class="chip">Потрачено</span><span class="chip">Сгорело</span></div>
+      <div class="h3" style="margin-top:14px;font-size:14px;color:var(--ink2)">В процессе</div>
+      <div class="row" style="padding:8px 0"><div class="ico cn"><ic n="qr"></ic></div><div class="g"><b>Вечер настольных игр</b><span>Задание активно · до 22:00</span></div><span class="amt" style="color:var(--cointxt)">+300</span></div>
+      <div class="h3" style="margin-top:6px;font-size:14px;color:var(--ink2)">Сентябрь</div>
+      <div class="row" style="padding:8px 0"><div class="ico"><ic n="flag"></ic></div><div class="g"><b>Парный падел · визит</b><span>10 сен · Клуб «Спин»</span></div><span class="amt plus">+200</span></div>
+      <div class="row" style="padding:8px 0"><div class="ico dk"><ic n="bag"></ic></div><div class="g"><b>Футболка «Я?За!»</b><span>8 сен · ЯзаМаркет</span></div><span class="amt">−800</span></div></div>
+    </div></div>
+    <figcaption><strong>Кошелёк</strong><ul><li>Баланс крупно, срок сгорания сразу под ним.</li><li>Ожидающие подтверждения коины — отдельно от начисленных.</li></ul></figcaption></figure>
+
+    <figure class="fig"><div class="phone" id="m-earn"><sb></sb><div class="pg">
+      <div class="hd"><span class="gbtn"><ic n="chevl"></ic></span><span class="h3">Заработать коины</span><span style="width:38px"></span></div>
+      <div class="pad"><div class="box"><div class="sp"><span class="h3">Уровень «Свой»</span><span class="xs mut" style="font-weight:800">1 250 / 2 000 XP</span></div><div class="xp" style="margin-top:10px"><i style="width:62%"></i></div><div class="xs mut" style="margin-top:8px;font-weight:600">Ещё 3 визита — коины за события ×1,2</div></div></div>
+      <div class="pad sp" style="margin-top:16px"><span class="h3">Сегодня рядом</span><span class="sm" style="color:var(--brand);font-weight:800">Все</span></div>
+      <div class="rail" style="margin-top:10px">
+        <div class="sq f-board"><span class="pill gold" style="top:10px;left:10px"><span class="coin"></span>300</span><div style="left:12px;right:10px;bottom:11px;font-weight:800;font-size:14px;line-height:1.15">Вечер настольных игр<div class="xs" style="font-weight:600;opacity:.8;margin-top:3px">19:00 · «Ход»</div></div></div>
+        <div class="sq f-padel"><span class="pill gold" style="top:10px;left:10px"><span class="coin"></span>150</span><div style="left:12px;right:10px;bottom:11px;font-weight:800;font-size:14px;line-height:1.15">Парный падел<div class="xs" style="font-weight:600;opacity:.8;margin-top:3px">14:00 · «Спин»</div></div></div>
+        <div class="sq f-pot"><span class="pill gold" style="top:10px;left:10px"><span class="coin"></span>200</span><div style="left:12px;right:10px;bottom:11px;font-weight:800;font-size:14px;line-height:1.15">Гончарка<div class="xs" style="font-weight:600;opacity:.8;margin-top:3px">Сб · «Глина»</div></div></div></div>
+      <div class="pad"><div class="h3" style="margin-top:16px">Каждый день</div>
+        <div class="row" style="padding:9px 0"><div class="ico cn"><ic n="check"></ic></div><div class="g"><b>Заходи каждый день</b><span>Серия 4 дня · завтра +20</span></div><span class="amt plus">+10</span></div>
+        <div class="row" style="padding:9px 0"><div class="ico cn"><ic n="users" c="s"></ic></div><div class="g"><b>Пригласи друга</b><span>+100 вам и другу</span></div><span class="btn sec sm">Позвать</span></div>
+        <div class="row" style="padding:9px 0"><div class="ico cn"><ic n="star"></ic></div><div class="g"><b>Оставь отзыв</b><span>После события</span></div><span class="amt plus">+30</span></div></div>
+    </div></div>
+    <figcaption><strong>Заработать</strong>Все способы в одном месте: задания рядом, ежедневные, приглашения. Прогресс уровня показывает, что дальше.</figcaption></figure>
+  </div>
+</section>
+
+<section id="s5">
+  <h2>ЯзаМэтч</h2>
+  <p class="lead">Знакомства через общие события: на карточке видно, где вы оба будете.</p>
+  <div class="stage">
+    <figure class="fig"><div class="phone" id="m-match"><sb></sb><div class="pg">
+      <div class="hd"><span class="title" style="font-size:26px">ЯзаМэтч</span><span class="gbtn"><ic n="sliders" c="s"></ic></span></div>
+      <div class="pad"><div class="chips"><span class="chip on">Для тебя</span><span class="chip">Рядом</span><span class="chip">С моих событий</span></div></div>
+      <div style="position:absolute;top:104px;left:0;right:0;bottom:172px"><div class="mcard" style="background-image:url(assets/people/5.jpg);background-position:50% 20%">
+        <div style="top:14px;left:14px;right:14px;display:flex;gap:4px"><i style="flex:1;height:4px;border-radius:2px;background:#fff"></i><i style="flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.4)"></i><i style="flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.4)"></i></div>
+        <div style="left:16px;right:16px;bottom:16px;color:#fff"><div style="font-size:30px;font-weight:800;letter-spacing:-.04em;display:flex;gap:8px;align-items:center">Алина, 27 <span class="ver" style="width:20px;height:20px"><ic n="check"></ic></span></div><div style="opacity:.85;font-size:13.5px;font-weight:600;margin-top:2px">Москва · 3 км от вас</div>
+        <div style="display:flex;gap:6px;margin-top:10px"><span class="pill glass" style="height:28px">Настолки</span><span class="pill glass" style="height:28px">Падел</span><span class="pill glass" style="height:28px">Гончарка</span></div>
+        <div class="glass" style="margin-top:12px;border-radius:18px;padding:9px 12px;display:flex;gap:10px;align-items:center;background:rgba(47,224,203,.28)"><span class="f-board" style="width:34px;height:34px;border-radius:11px;background-size:cover;flex:none"></span><div style="font-size:12.5px;font-weight:700;line-height:1.25">Вы оба идёте на «Вечер настольных игр» сегодня</div></div></div></div></div>
+      <div class="mact" style="position:absolute;left:0;right:0;bottom:96px"><span class="b"><ic n="x" c="l"></ic></span><span class="b big"><ic n="heart" c="xl"></ic></span><span class="b" style="color:#E3A21A"><ic n="sparkle" c="l"></ic></span></div>
+      <tabbar a="1"></tabbar>
+    </div></div>
+    <figcaption><strong>Колода</strong><ul><li>Крупное фото, действия под большим пальцем.</li><li>Плашка «вы оба идёте на…» — повод написать.</li></ul></figcaption></figure>
+
+    <figure class="fig"><div class="phone" id="m-matched"><sb></sb><div class="pg" style="background:radial-gradient(circle at 50% 22%,rgba(63,224,204,.35),transparent 55%),var(--bg)">
+      <div class="hd"><span class="gbtn"><ic n="x"></ic></span></div>
+      <div style="display:flex;flex-direction:column;align-items:center;text-align:center;padding:26px 24px 0">
+        <div style="display:flex;position:relative"><pp n="12" c="xxl" ></pp><pp n="5" c="xxl"></pp></div>
+        <span style="position:absolute;top:166px;width:56px;height:56px;border-radius:50%;background:var(--grad);color:#fff;display:grid;place-items:center;box-shadow:0 12px 24px rgba(10,127,117,.45);border:4px solid var(--bg)"><ic n="heart" c="l"></ic></span>
+        <div class="title" style="font-size:36px;margin-top:44px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">Это взаимно!</div>
+        <p class="mut" style="margin-top:8px;font-size:15px;font-weight:500">Вы с Алиной понравились друг другу. Начните с общего повода:</p>
+        <div class="box" style="margin-top:20px;width:100%;text-align:left;display:flex;gap:12px;align-items:center;padding:10px"><span class="f-board" style="width:52px;height:52px;border-radius:16px;background-size:cover;flex:none"></span><div><b>Вечер настольных игр</b><div class="xs mut" style="font-weight:600">Сегодня, 19:00 · вы оба идёте</div></div></div>
+      </div>
+      <div class="pad" style="position:absolute;left:0;right:0;bottom:34px;display:grid;gap:6px"><div class="btn"><ic n="chat" c="s"></ic>Написать Алине</div><div class="btn ghost" style="box-shadow:none;height:42px">Продолжить смотреть</div></div>
+    </div></div>
+    <figcaption><strong>Взаимный лайк</strong>Сразу кнопка «Написать» и общее событие как тема разговора.</figcaption></figure>
+
+    <figure class="fig"><div class="phone" id="m-likes"><sb></sb><div class="pg">
+      <div class="hd"><span class="title" style="font-size:26px">Лайки вам</span><span class="pill br">7 новых</span></div>
+      <div class="pad" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px">
+        <div class="ptile" style="height:190px;background-image:url(assets/people/60.jpg);background-position:50% 20%;align-items:flex-end"><div><div style="font-size:17px">Игорь, 29</div><div class="xs" style="font-weight:700;opacity:.85">2 общих события</div></div></div>
+        <div class="ptile" style="height:190px;background-image:url(assets/people/20.jpg);background-position:50% 20%"><div><div style="font-size:17px">Настя, 25</div><div class="xs" style="font-weight:700;opacity:.85">Падел, походы</div></div></div>
+        <div class="ptile" style="height:190px;background-image:url(assets/people/16.jpg);background-position:50% 20%"><div><div style="font-size:17px">Лера, 26</div><div class="xs" style="font-weight:700;opacity:.85">Гончарка</div></div></div>
+        <div class="ptile" style="height:190px;background-image:url(assets/people/44.jpg);background-position:50% 20%"><div style="position:absolute;inset:0;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(10,127,117,.35);z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><span class="hbtn glass"><ic n="sparkle"></ic></span><b style="font-size:16px">Ещё 4</b></div></div></div>
+      <tabbar a="1"></tabbar>
+    </div></div>
+    <figcaption><strong>Лайки вам</strong>Сетка с фото; тап открывает карточку с кнопками.</figcaption></figure>
+  </div>
+</section>
+
+<section id="s6">
+  <h2>Чаты</h2>
+  <p class="lead">Личные чаты, чаты событий и группы. Новое — несколько закреплённых сообщений с переключением.</p>
+  <div class="stage">
+    <figure class="fig"><div class="phone" id="m-chats"><sb></sb><div class="pg">
+      <div class="hd"><span class="title" style="font-size:28px">Чаты</span><div class="hr"><span class="gbtn"><ic n="archive" c="s"></ic></span><span class="gbtn" style="background:var(--grad);color:#fff"><ic n="edit" c="s"></ic></span></div></div>
+      <div class="pad"><div class="search" style="height:44px"><ic n="search" c="s"></ic>Поиск по чатам</div></div>
+      <div class="pad" style="margin-top:10px"><div class="chips"><span class="chip on">Все</span><span class="chip">Непрочитанные<span class="unread" style="min-width:18px;height:18px;line-height:18px;font-size:11px">3</span></span><span class="chip">События</span><span class="chip">Личные</span></div></div>
+      <div class="pad" style="margin-top:4px">
+        <div class="row"><span class="av l f-board" style="background-size:cover"></span><div class="g"><b>Вечер настольных игр</b><span><b style="display:inline;font-weight:800;color:var(--ink)">Маша:</b> Не забудьте паспорт</span></div><div style="text-align:right"><div class="xs mut3" style="font-weight:700">10:22</div><span class="unread" style="margin-top:3px">5</span></div></div>
+        <div class="row"><pp n="5" c="l" o></pp><div class="g"><b>Алина</b><span>Ты знаешь, что делать :D</span></div><div style="text-align:right"><div class="xs mut3" style="font-weight:700">14:45</div><ic n="checks" c="s" style="color:var(--brand)"></ic></div></div>
+        <div class="row"><pp n="16" c="l"></pp><div class="g"><b>Катя Т.</b><span>Очень круто! Рада за тебя</span></div><div style="text-align:right"><div class="xs mut3" style="font-weight:700">8:12</div><span class="unread" style="margin-top:3px">1</span></div></div>
+        <div class="row"><span class="av l f-padel" style="background-size:cover"></span><div class="g"><b>Парный падел</b><span><ic n="pinm" c="s"></ic> Корт №3, берите воду</span></div><div style="text-align:right"><div class="xs mut3" style="font-weight:700">Вс</div><span class="unread mute" style="margin-top:3px">12</span></div></div>
+        <div class="row"><pp n="32" c="l"></pp><div class="g"><b>Оля М.</b><span>Интересно 👀</span></div><div class="xs mut3" style="font-weight:700">Пт</div></div>
+      </div>
+      <tabbar a="2" b="3"></tabbar>
+    </div></div>
+    <figcaption><strong>Список</strong><ul><li>Фильтры: все, непрочитанные, события, личные.</li><li>Чат события — с обложкой события; закреп виден в строке.</li></ul></figcaption></figure>
+
+    <figure class="fig"><div class="phone" id="m-thread"><sb></sb><div class="pg">
+      <div class="hd" style="padding-bottom:6px"><span class="gbtn"><ic n="chevl"></ic></span><div style="display:flex;gap:10px;align-items:center;flex:1;margin-left:10px"><span class="av m f-board" style="background-size:cover"></span><div><div style="font-weight:800;font-size:15px;letter-spacing:-.02em;white-space:nowrap">Вечер настольных игр</div><div class="xs mut" style="font-weight:600;white-space:nowrap">12 участников · 19:00</div></div></div><span class="gbtn bare"><ic n="more"></ic></span></div>
+      <div class="pinbar"><div class="seq"><i class="on"></i><i></i><i></i></div><div style="flex:1;min-width:0"><div class="xs" style="color:var(--brand);font-weight:800">Закреплено · 1 из 3</div><div class="sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600">Адрес: Хамовнический вал, 24, 2 этаж</div></div><ic n="list" c="s" style="color:var(--ink2)"></ic></div>
+      <div class="msgs">
+        <span class="sys">Сегодня</span>
+        <div style="display:flex;gap:8px;align-items:flex-end"><pp n="44" c="xs"></pp><div class="bub in"><span class="who">Маша · организатор</span>Привет! Начинаем в 19:00, есть 2 свободных места</div></div>
+        <div style="display:flex;gap:8px;align-items:flex-end"><pp n="16" c="xs"></pp><div class="bub in"><span class="who" style="color:#C2477A">Катя</span>Могу взять с собой друга?<small>10:19</small></div></div>
+        <div class="bub out">Да, конечно! Я тоже буду<small>10:20 · прочитано</small></div>
+        <div style="display:flex;gap:8px;align-items:flex-end"><pp n="44" c="xs"></pp><div class="bub in"><span class="who">Маша · организатор</span>Ребята, не забудьте паспорт 🙂<small>10:22</small></div></div>
+        <span class="sys">Маша закрепила сообщение</span>
+      </div>
+      <div class="composer"><span class="gbtn"><ic n="plus"></ic></span><div class="in">Сообщение</div><span class="gbtn" style="background:var(--grad);color:#fff;box-shadow:none"><ic n="mic" c="s"></ic></span></div>
+    </div></div>
+    <figcaption><strong>Диалог</strong><ul><li>Стеклянная плашка закрепа: «1 из 3», тап — к сообщению.</li><li>Организатор подписан ролью.</li></ul></figcaption></figure>
+
+    <figure class="fig"><div class="phone" id="m-pins"><sb></sb><div class="pg">
+      <div class="hd"><span class="gbtn"><ic n="chevl"></ic></span></div>
+      <div class="scrim"></div>
+      <div class="sheet" style="top:170px"><div class="grab"></div>
+        <div class="sp"><div class="h2">Закреплённые · 3</div><span class="gbtn" style="background:var(--sf2);box-shadow:none;width:34px;height:34px"><ic n="x" c="s"></ic></span></div>
+        <div style="margin-top:10px;display:grid;gap:8px">
+          <div class="box" style="display:flex;align-items:center;gap:10px;padding:12px 14px"><div style="flex:1"><span class="xs" style="color:var(--brand);font-weight:800">Маша · 9:40</span><b style="display:block;font-weight:700;font-size:14.5px;margin-top:2px">Адрес: Хамовнический вал, 24, 2 этаж</b></div><ic n="chevr" c="s" style="color:var(--ink3)"></ic></div>
+          <div class="box" style="display:flex;align-items:center;gap:10px;padding:12px 14px"><div style="flex:1"><span class="xs" style="color:var(--brand);font-weight:800">Маша · 10:22</span><b style="display:block;font-weight:700;font-size:14.5px;margin-top:2px">Ребята, не забудьте паспорт 🙂</b></div><ic n="chevr" c="s" style="color:var(--ink3)"></ic></div>
+          <div class="box" style="display:flex;align-items:center;gap:10px;padding:12px 14px"><div style="flex:1"><span class="xs" style="color:var(--brand);font-weight:800">Артём · вчера</span><b style="display:block;font-weight:700;font-size:14.5px;margin-top:2px">Правила турнира — 2 фото</b></div><ic n="chevr" c="s" style="color:var(--ink3)"></ic></div></div>
+        <div class="xs mut" style="margin-top:14px;font-weight:600">Закреплять могут организатор и модераторы. Долгое нажатие — открепить.</div>
+      </div></div></div>
+    <figcaption><strong>Все закрепы</strong>Список по времени с автором; тап — переход к сообщению.</figcaption></figure>
+  </div>
+</section>
+<section id="s7">
+  <h2>ЯзаГрамм · ЯзаМаркет · Учёба</h2>
+  <div class="stage">
+    <figure class="fig"><div class="phone" id="m-gram"><sb></sb><div class="pg">
+      <div class="hd"><span class="title" style="font-size:26px">ЯзаГрамм</span><span class="gbtn"><ic n="camera" c="s"></ic></span></div>
+      <div class="pad"><div class="stories"><div><div class="ring"><span class="av" style="background:var(--grad);display:grid;place-items:center;color:#fff"><ic n="plus"></ic></span></div>Моя</div><div><div class="ring"><pp n="44"></pp></div>Маша</div><div><div class="ring"><pp n="60"></pp></div>Артём</div><div><div class="ring seen"><pp n="16"></pp></div>Катя</div><div><div class="ring seen"><pp n="12"></pp></div>Игорь</div></div></div>
+      <div class="pad" style="margin-top:12px"><div class="chips"><span class="chip on">Друзья</span><span class="chip">События</span><span class="chip">Рядом</span></div></div>
+      <div class="post" style="margin-top:12px"><div class="pr"><pp n="44" c="m"></pp><div style="flex:1"><b style="font-weight:800">Маша</b><div class="xs mut" style="font-weight:600">Вечер настольных игр · 2 ч назад</div></div><ic n="more" c="s"></ic></div>
+        <div class="f-board" style="height:236px;background-size:cover;background-position:50% 40%;margin:0 8px;border-radius:22px"></div>
+        <div class="pr" style="padding-bottom:8px;gap:16px"><span style="display:flex;gap:5px;align-items:center;font-weight:800;color:var(--like)"><ic n="heart"></ic>48</span><span style="display:flex;gap:5px;align-items:center;font-weight:800"><ic n="chat"></ic>6</span><span style="margin-left:auto"><ic n="share"></ic></span></div>
+        <div style="padding:0 14px 14px;font-weight:500" class="sm"><b>Маша</b> Лучший вечер этого месяца, спасибо всем, кто пришёл!</div></div>
+      <tabbar a="3"></tabbar>
+    </div></div>
+    <figcaption><strong>ЯзаГрамм</strong><ul><li>Истории сверху — быстрый вход в то, что происходит сегодня.</li><li>Пост привязан к событию: тап по подписи открывает его.</li></ul></figcaption></figure>
+
+    <figure class="fig"><div class="phone" id="m-market"><sb></sb><div class="pg">
+      <div class="hd"><span class="title" style="font-size:26px">ЯзаМаркет</span><div class="hr"><span class="coinchip"><span class="coin"></span>1 250</span><span class="gbtn"><ic n="bag" c="s"></ic></span></div></div>
+      <div class="pad"><div class="chips"><span class="chip on">Всё</span><span class="chip">Мерч</span><span class="chip">Билеты</span><span class="chip">Скидки</span><span class="chip">Партнёры</span></div></div>
+      <div class="pad" style="margin-top:12px"><div style="border-radius:26px;padding:16px 16px;background:linear-gradient(135deg,#FFE7A0,#F4B93C);color:#3F2600;display:flex;gap:12px;align-items:center;position:relative;overflow:hidden"><span class="coin xl"></span><div style="flex:1"><b style="font-size:17px;font-weight:800;letter-spacing:-.03em">Хватает на 3 товара</b><div class="xs" style="font-weight:700;opacity:.8;margin-top:2px">Ещё 150 — откроется худи</div></div><ic n="chevr"></ic></div></div>
+      <div class="pad" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
+        <div class="prod"><div class="im g1"><svg viewBox="0 0 64 64"><path d="M22 8 6 16l5 12 7-3v31h28V25l7 3 5-12-16-8c-1 5-5 8-10 8s-9-3-10-8z"/></svg></div><div class="pb"><b class="sm" style="font-weight:800">Футболка «Я?За!»</b><div style="display:flex;align-items:center;gap:5px;font-weight:800;color:var(--cointxt);margin-top:3px"><span class="coin"></span>800</div></div></div>
+        <div class="prod"><div class="im g2"><svg viewBox="0 0 64 64"><path d="M6 20h52v10a6 6 0 0 0 0 12v10H6V42a6 6 0 0 0 0-12z"/></svg></div><div class="pb"><b class="sm" style="font-weight:800">Билет в клуб «Ход»</b><div style="display:flex;align-items:center;gap:5px;font-weight:800;color:var(--cointxt);margin-top:3px"><span class="coin"></span>400</div></div></div>
+        <div class="prod"><div class="im g3"><svg viewBox="0 0 64 64"><path d="M10 40c0-15 10-24 22-24s22 9 22 24z"/><path d="M6 44h40c8 0 12-3 12-3-1 6-7 9-14 9H6z"/></svg></div><div class="pb"><b class="sm" style="font-weight:800">Кепка</b><div style="display:flex;align-items:center;gap:5px;font-weight:800;color:var(--cointxt);margin-top:3px"><span class="coin"></span>600</div></div></div>
+        <div class="prod"><div class="im g4"><svg viewBox="0 0 64 64"><path d="M8 8h24l26 26-24 24L8 32z"/></svg></div><div class="pb"><b class="sm" style="font-weight:800">−20% на падел</b><div style="display:flex;align-items:center;gap:5px;font-weight:800;color:var(--cointxt);margin-top:3px"><span class="coin"></span>250</div></div></div></div>
+      <tabbar a="4"></tabbar>
+    </div></div>
+    <figcaption><strong>ЯзаМаркет</strong><ul><li>Баланс в шапке и подсказка, что можно купить сейчас.</li><li>Цена всегда с золотой монетой.</li></ul></figcaption></figure>
+
+    <figure class="fig"><div class="phone dark" id="m-study"><sb></sb><div class="pg">
+      <div class="hd"><div><span class="logo">Я<i>?</i>За!</span><br><span class="city"><ic n="pin" c="s"></ic>Москва<ic n="chevd" c="s"></ic></span></div><div class="hr"><span class="coinchip"><span class="coin"></span>1 250</span><span class="gbtn"><ic n="bell"></ic></span></div></div>
+      <div class="tabs"><span>События</span><b>Учёба</b></div>
+      <div class="pad" style="margin-top:10px"><div class="chips"><span class="chip on">Все</span><span class="chip">Языки</span><span class="chip">Ремёсла</span><span class="chip">Бизнес</span><span class="chip">Онлайн</span></div></div>
+      <div class="pc f-pot" style="margin-top:12px;height:270px;background-position:50% 55%">
+        <div class="top"><div style="display:flex;gap:8px"><div class="dt glass"><small>Сб</small><b>19</b></div><span class="pill glass" style="height:26px;margin-top:2px">Мастер-класс</span></div><span class="hbtn glass"><ic n="heart"></ic></span></div>
+        <div class="bot"><h3>Гончарный мастер-класс</h3><div class="m"><ic n="clock" c="s"></ic>12:00 · 3 часа · «Глина»</div><div class="sp" style="margin-top:10px"><span class="pill glass" style="height:30px">Для новичков</span><span style="font-weight:800;font-size:17px">1 200 ₽</span></div></div></div>
+      <div class="pc" style="margin-top:12px;height:140px;background:radial-gradient(circle at 90% 10%,rgba(255,214,107,.5),transparent 45%),linear-gradient(135deg,#2B2C8F,#7B3FD1);box-shadow:none">
+        <div style="left:18px;top:16px;font-size:34px;font-weight:800;letter-spacing:-.05em;line-height:1">Hello,<br>Привет</div><div class="bot" style="font-weight:800;font-size:14px;display:flex;justify-content:space-between;align-items:flex-end"><span>Разговорный английский<div class="xs" style="font-weight:600;opacity:.8;margin-top:2px">Онлайн · Вт и Чт, 20:00</div></span><span class="pill white">2 400 ₽</span></div></div>
+      <tabbar a="0"></tabbar>
+    </div></div>
+    <figcaption><strong>Учёба</strong><ul><li>Те же афиши и фильтры, что у событий — привычно.</li><li>Курсы без фото получают типографичную обложку.</li></ul></figcaption></figure>
+  </div>
+</section>
+
+<section id="s8">
+  <h2>Профиль · Уведомления</h2>
+  <div class="stage">
+    <figure class="fig"><div class="phone" id="m-profile"><sb></sb><div class="pg">
+      <div class="hd"><span class="gbtn"><ic n="chevl"></ic></span><span class="gbtn"><ic n="gear"></ic></span></div>
+      <div style="display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 16px"><pp n="12" c="xl"></pp>
+        <div class="title" style="font-size:25px;margin-top:12px;display:flex;gap:6px;align-items:center">Ян Захаров <span class="ver" style="width:18px;height:18px"><ic n="check"></ic></span></div><div class="mut sm" style="font-weight:600">Москва · уровень «Свой»</div>
+        <div class="box" style="display:flex;margin-top:16px;width:100%;padding:14px 0"><div style="flex:1;text-align:center"><b style="font-size:21px;font-weight:800">18</b><div class="xs mut" style="font-weight:700">событий</div></div><div style="flex:1;text-align:center;border-left:1px solid var(--line);border-right:1px solid var(--line)"><b style="font-size:21px;font-weight:800">4,9</b><div class="xs mut" style="font-weight:700">24 отзыва</div></div><div style="flex:1;text-align:center"><b style="font-size:21px;font-weight:800;color:var(--cointxt)">1 250</b><div class="xs mut" style="font-weight:700">коинов</div></div></div></div>
+      <div class="tabs" style="margin-top:14px;gap:16px"><b style="font-size:17px">Мои события</b><span style="font-size:17px">Отзывы</span><span style="font-size:17px">О себе</span></div>
+      <div class="pad" style="margin-top:4px">
+        <div class="row" style="padding:9px 0"><span class="f-board" style="width:56px;height:56px;border-radius:18px;background-size:cover;flex:none"></span><div class="g"><b>Вечер настольных игр</b><span>Сегодня, 19:00</span></div><span class="pill solid-ok">Иду</span></div>
+        <div class="row" style="padding:9px 0"><span class="f-padel" style="width:56px;height:56px;border-radius:18px;background-size:cover;flex:none"></span><div class="g"><b>Парный падел</b><span>Ср, 14:00</span></div><span class="pill warn">Ожидание</span></div>
+        <div class="row" style="padding:9px 0"><span class="f-hike" style="width:56px;height:56px;border-radius:18px;background-size:cover;flex:none"></span><div class="g"><b>Поход на Воробьёвы</b><span>Сб, 10:00</span></div><span class="pill br">Организую</span></div></div>
+      <tabbar a="0"></tabbar>
+    </div></div>
+    <figcaption><strong>Профиль</strong><ul><li>Три цифры репутации в одной плашке.</li><li>Тема, язык и уведомления — в шестерёнке, а не в шапке ленты.</li></ul></figcaption></figure>
+
+    <figure class="fig"><div class="phone" id="m-notif"><sb></sb><div class="pg">
+      <div class="hd"><span class="gbtn"><ic n="chevl"></ic></span><span class="h3">Уведомления</span><span style="color:var(--brand);font-weight:800;font-size:13px;width:62px;text-align:right">Все</span></div>
+      <div class="pad"><div class="chips"><span class="chip on">Все</span><span class="chip">События</span><span class="chip">Коины</span><span class="chip">Чаты</span></div>
+      <div class="xs mut3" style="font-weight:800;letter-spacing:.07em;margin:16px 0 2px">СЕГОДНЯ</div>
+      <div class="row"><span class="f-board" style="width:46px;height:46px;border-radius:15px;background-size:cover;flex:none"></span><div class="g"><b>Через 2 часа: Вечер настольных игр</b><span>Клуб «Ход». Не забудьте паспорт</span></div><i style="width:9px;height:9px;border-radius:50%;background:var(--brand)"></i></div>
+      <div class="row"><div class="ico cn" style="width:46px;height:46px"><span class="coin l"></span></div><div class="g"><b>+200 ЯзаКоин за визит</b><span>Парный падел · подтвердил клуб</span></div><i style="width:9px;height:9px;border-radius:50%;background:var(--brand)"></i></div>
+      <div class="row"><pp n="5" c="m"></pp><div class="g"><b>Алина лайкнула вас</b><span>Вы оба идёте на «Вечер настольных игр»</span></div></div>
+      <div class="xs mut3" style="font-weight:800;letter-spacing:.07em;margin:12px 0 2px">ВЧЕРА</div>
+      <div class="row"><span class="f-hike" style="width:46px;height:46px;border-radius:15px;background-size:cover;flex:none"></span><div class="g"><b>Вас подтвердили в «Поход на Воробьёвы»</b><span>Организатор одобрил заявку</span></div></div>
+      <div class="row"><div class="ico cn" style="width:46px;height:46px"><ic n="clock"></ic></div><div class="g"><b>150 коинов сгорят через 3 дня</b><span>Потратьте их в ЯзаМаркете</span></div></div></div>
+    </div></div>
+    <figcaption><strong>Уведомления</strong>Группировка по дням и типам; каждое ведёт сразу на нужный экран.</figcaption></figure>
+  </div>
+</section>
+
+<section id="s9">
+  <h2>Состояния экранов</h2>
+  <p class="lead">Загрузка, пусто, нет сети и ошибка — для каждого экрана с данными. Ниже на примере ленты.</p>
+  <div class="stage">
+    <figure class="fig"><div class="phone" id="m-load"><sb></sb><div class="pg">
+      <div class="hd"><span class="logo">Я<i>?</i>За!</span><div class="hr"><span class="coinchip"><span class="coin"></span>1 250</span><span class="gbtn"><ic n="bell"></ic></span></div></div>
+      <div class="tabs"><b>События</b><span>Учёба</span></div>
+      <div class="pad" style="margin-top:12px"><div class="sk" style="height:48px;border-radius:16px"></div></div>
+      <div class="pad" style="margin-top:12px;display:flex;gap:6px"><div class="sk" style="width:46px;height:62px;border-radius:17px"></div><div class="sk" style="width:46px;height:62px;border-radius:17px"></div><div class="sk" style="width:46px;height:62px;border-radius:17px"></div><div class="sk" style="width:46px;height:62px;border-radius:17px"></div><div class="sk" style="width:46px;height:62px;border-radius:17px"></div></div>
+      <div class="sk" style="margin:14px 16px 0;height:260px;border-radius:30px"></div>
+      <div class="sk" style="margin:12px 16px 0;height:260px;border-radius:30px"></div>
+      <tabbar a="0"></tabbar>
+    </div></div>
+    <figcaption><strong>Загрузка</strong>Скелетон формы афиши, шапка и таб-бар на месте.</figcaption></figure>
+
+    <figure class="fig"><div class="phone" id="m-empty"><sb></sb><div class="pg">
+      <div class="hd"><span class="logo">Я<i>?</i>За!</span><div class="hr"><span class="coinchip"><span class="coin"></span>1 250</span><span class="gbtn"><ic n="bell"></ic></span></div></div>
+      <div class="pad"><div class="search"><ic n="search"></ic>Найти событие<span class="f"><ic n="sliders" c="s"></ic><em>4</em></span></div></div>
+      <div class="empty" style="position:absolute;top:190px;left:0;right:0"><div class="bigic"><ic n="search" c="xl"></ic></div><div class="h2">Ничего не нашлось</div><p class="mut" style="font-weight:500">Попробуйте убрать часть фильтров или выбрать другой день.</p><div class="btn sec sm" style="margin-top:4px;height:44px">Сбросить фильтры</div><div style="margin-top:4px;color:var(--brand);font-weight:800">Создать своё событие</div></div>
+      <tabbar a="0"></tabbar>
+    </div></div>
+    <figcaption><strong>Пусто</strong>Объясняем причину и даём два выхода: сбросить фильтры или создать событие.</figcaption></figure>
+
+    <figure class="fig"><div class="phone" id="m-offline"><sb></sb><div class="pg">
+      <div class="hd"><span class="logo">Я<i>?</i>За!</span><div class="hr"><span class="coinchip"><span class="coin"></span>1 250</span><span class="gbtn"><ic n="bell"></ic></span></div></div>
+      <div class="pad"><div class="box" style="background:var(--warnbg);box-shadow:none;display:flex;gap:10px;align-items:center;padding:11px 14px;border-radius:18px"><ic n="wifioff" c="s" style="color:var(--warn)"></ic><span class="sm" style="color:var(--warn);font-weight:800;flex:1">Нет сети. Показываем сохранённое</span><span class="sm" style="color:var(--warn);font-weight:800">Повторить</span></div></div>
+      <div class="pc f-board" style="margin-top:12px;height:250px;background-position:50% 30%"><div class="bot"><h3>Вечер настольных игр</h3><div class="m">Сегодня, 19:00 · Хамовники</div><div class="btn dis" style="margin-top:12px;height:44px;background:rgba(255,255,255,.2);color:#fff">Запись недоступна без сети</div></div></div>
+      <tabbar a="0"></tabbar>
+    </div></div>
+    <figcaption><strong>Нет сети</strong>Лента и «Мои события» остаются из кэша. Действия, которым нужна сеть, неактивны, с пояснением.</figcaption></figure>
+
+    <figure class="fig"><div class="phone" id="m-error"><sb></sb><div class="pg">
+      <div class="empty" style="position:absolute;top:220px;left:0;right:0"><div class="bigic" style="background:var(--warnbg);color:var(--warn)"><ic n="info" c="xl"></ic></div><div class="h2">Не получилось загрузить</div><p class="mut" style="font-weight:500">Что-то пошло не так на нашей стороне. Это не ваша вина.</p><div class="btn sm" style="margin-top:4px;height:44px;padding:0 28px">Повторить</div></div>
+      <tabbar a="0"></tabbar>
+    </div></div>
+    <figcaption><strong>Ошибка</strong>Человеческий текст и «Повторить». Ошибки полей — под полем, не алертом.</figcaption></figure>
+  </div>
+</section>
+</main>
+</div>
+<script>
+const P={
+signal:'<path d="M4 18v-3M9 18v-6M14 18V9M19 18V5"/>',
+wifi:'<path d="M3 9a13 13 0 0 1 18 0M6 12.5a8.5 8.5 0 0 1 12 0M9.2 16a4 4 0 0 1 5.6 0"/><circle cx="12" cy="19" r=".6"/>',
+wifioff:'<path d="M3 3l18 18M3 9a13 13 0 0 1 4-2.6M17 6.4A13 13 0 0 1 21 9M6 12.5a8.5 8.5 0 0 1 3-1.8M14.5 11a8.5 8.5 0 0 1 3.5 1.5M9.2 16a4 4 0 0 1 5.6 0"/>',
+calendar:'<rect x="3" y="4.5" width="18" height="16.5" rx="3"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/>',
+heart:'<path d="M12 20.5s-8-4.7-8-10.6A4.4 4.4 0 0 1 12 7.4a4.4 4.4 0 0 1 8 2.5c0 5.9-8 10.6-8 10.6z"/>',
+chat:'<path d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 20.5l1.5-5.2A8.5 8.5 0 1 1 21 11.5z"/>',
+grid:'<rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/>',
+bag:'<path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/>',
+search:'<circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/>',
+sliders:'<path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/>',
+plus:'<path d="M12 5v14M5 12h14"/>',
+bell:'<path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15l1.5-2z"/><path d="M10 21h4"/>',
+pin:'<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/>',
+map:'<path d="M9 4 3.5 6v14L9 18l6 2 5.5-2V4L15 6 9 4z"/><path d="M9 4v14M15 6v14"/>',
+users:'<circle cx="9" cy="8.5" r="3.2"/><path d="M3 20c.5-3.4 3-5 6-5s5.5 1.6 6 5"/><circle cx="17" cy="9.5" r="2.5"/><path d="M17.5 14.5c2.2.2 3.5 1.7 3.8 4.5"/>',
+star:'<path fill="currentColor" stroke="none" d="m12 3 2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.8 6.6 19.7l1.1-6.1L3.2 9.4l6.1-.8L12 3z"/>',
+check:'<path d="m5 12.5 4.5 4.5L19 7.5"/>',
+checks:'<path d="m2.5 12.5 4 4L14 8M10 15.5l1 1L20 8"/>',
+x:'<path d="M6 6l12 12M18 6 6 18"/>',
+chevd:'<path d="m6 9 6 6 6-6"/>',chevr:'<path d="m9 6 6 6-6 6"/>',chevl:'<path d="m15 6-6 6 6 6"/>',
+share:'<path d="M12 15V3.5M8 7l4-4 4 4"/><path d="M5 12v7a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 19v-7"/>',
+nav:'<path d="m4 11 16-7-7 16-2-7-7-2z"/>',
+flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',
+trophy:'<path d="M8 4h8v5a4 4 0 0 1-8 0V4z"/><path d="M8 6H4.5v1.5A3.5 3.5 0 0 0 8 11M16 6h3.5v1.5A3.5 3.5 0 0 1 16 11M12 13v4M8.5 20h7"/>',
+info:'<circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 8v.01"/>',
+sparkle:'<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z"/>',
+qr:'<rect x="3.5" y="3.5" width="6" height="6" rx="1"/><rect x="14.5" y="3.5" width="6" height="6" rx="1"/><rect x="3.5" y="14.5" width="6" height="6" rx="1"/><path d="M14.5 14.5h2.5v2.5M20.5 14.5v.01M14.5 20.5h.01M17 20.5h3.5v-3"/>',
+list:'<path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/>',
+pinm:'<path d="M9 4h6l-1 6 3 3H7l3-3-1-6z"/><path d="M12 13v7"/>',
+archive:'<rect x="3.5" y="4" width="17" height="4.5" rx="1.5"/><path d="M5 8.5V19a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5M10 12.5h4"/>',
+edit:'<path d="M4 20h4L19 9a2.5 2.5 0 0 0-4-4L4 16v4z"/><path d="m13.5 6.5 4 4"/>',
+camera:'<path d="M4 8h3l1.5-2.5h7L17 8h3v11H4V8z"/><circle cx="12" cy="13.5" r="3.5"/>',
+mic:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/>',
+more:'<circle cx="5" cy="12" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="19" cy="12" r="1.5" fill="currentColor"/>',
+gear:'<circle cx="12" cy="12" r="3"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"/>',
+download:'<path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 20h14"/>',
+clock:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>'
+};
+const TABS=[['calendar','События'],['heart','Мэтч'],['chat','Чаты'],['grid','Лента'],['bag','Маркет']];
+const svg=(n,c,cls,style)=>`<svg class="ic ${c||''} ${cls||''}" viewBox="0 0 24 24" ${style?`style="${style}"`:''}>${P[n]||''}</svg>`;
+function run(){
+  document.querySelectorAll('pp').forEach(e=>{const c=e.getAttribute('c')||'';e.outerHTML=`<span class="av ${c} ${e.hasAttribute('o')?'online':''}" style="background-image:url(assets/people/${e.getAttribute('n')}.jpg)"></span>`});
+  document.querySelectorAll('ic').forEach(e=>{e.outerHTML=svg(e.getAttribute('n'),e.getAttribute('c'),e.getAttribute('class'),e.getAttribute('style'))});
+  document.querySelectorAll('sb').forEach(e=>{e.outerHTML=`<div class="sb ${e.hasAttribute('w')?'w':''}"><span>9:41</span><span class="r">${svg('signal','s')}${svg('wifi','s')}<i class="bat"></i></span></div>`});
+  document.querySelectorAll('tabbar').forEach(e=>{
+    const a=+e.getAttribute('a'),b=e.getAttribute('b');
+    e.outerHTML='<nav class="tab">'+TABS.map((t,i)=>`<div class="${i===a?'on':''}" aria-label="${t[1]}">${svg(t[0])}${i===a?t[1]:''}${b&&i===2&&i!==a?`<i class="bdg">${b}</i>`:''}</div>`).join('')+'</nav><div class="hi"></div>';
+  });
+  const q=document.getElementById('qrbox');
+  if(q){let s=11,h='';
+    for(let y=0;y<15;y++)for(let x=0;x<15;x++){
+      const inF=(x<5&&y<5)||(x>9&&y<5)||(x<5&&y>9);let on;
+      if(inF){const lx=x>9?x-10:x,ly=y>9?y-10:y;const ring=lx===0||lx===4||ly===0||ly===4;const core=lx===2&&ly===2;on=ring||core}
+      else{s=(s*9301+49297)%233280;on=s/233280>.48}
+      h+=`<i class="${on?'':'w'}"></i>`}
+    q.innerHTML=h}
+}
+run();
+document.getElementById('tog').onclick=function(){const d=document.body.classList.toggle('alldark');this.textContent=d?'Все экраны: светлая тема':'Все экраны: тёмная тема'};
+</script>
+</body>
+</html>
